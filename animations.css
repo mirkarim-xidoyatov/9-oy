@@ -1,0 +1,111 @@
+/* AutoMart.uz — shared motion / micro-interactions */
+
+@keyframes bodyFadeIn { from { opacity: 0; } to { opacity: 1; } }
+body { animation: bodyFadeIn .45s ease both; }
+
+@keyframes popIn {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.32); }
+  100% { transform: scale(1); }
+}
+.animate-pop { animation: popIn .38s cubic-bezier(.34,1.56,.64,1); }
+
+@keyframes softBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.animate-bounce-once { animation: softBounce .5s ease; }
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(41,169,235,.55); }
+  70% { box-shadow: 0 0 0 14px rgba(41,169,235,0); }
+  100% { box-shadow: 0 0 0 0 rgba(41,169,235,0); }
+}
+.fab-telegram { animation: pulseRing 2.6s ease-out infinite; }
+.fab-telegram:hover { animation-play-state: paused; }
+
+/* Scroll reveal */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+[data-reveal].in-view { opacity: 1; transform: translateY(0); }
+[data-reveal="scale"] { transform: scale(.92); }
+[data-reveal="scale"].in-view { transform: scale(1); }
+[data-reveal="left"] { transform: translateX(-28px); }
+[data-reveal="left"].in-view { transform: translateX(0); }
+[data-reveal="right"] { transform: translateX(28px); }
+[data-reveal="right"].in-view { transform: translateX(0); }
+
+/* Stagger for grid/flex children rendered together */
+.grid > [data-reveal]:nth-child(1),.flex > [data-reveal]:nth-child(1) { transition-delay: 0ms; }
+.grid > [data-reveal]:nth-child(2),.flex > [data-reveal]:nth-child(2) { transition-delay: 50ms; }
+.grid > [data-reveal]:nth-child(3),.flex > [data-reveal]:nth-child(3) { transition-delay: 100ms; }
+.grid > [data-reveal]:nth-child(4),.flex > [data-reveal]:nth-child(4) { transition-delay: 150ms; }
+.grid > [data-reveal]:nth-child(5),.flex > [data-reveal]:nth-child(5) { transition-delay: 200ms; }
+.grid > [data-reveal]:nth-child(6),.flex > [data-reveal]:nth-child(6) { transition-delay: 250ms; }
+.grid > [data-reveal]:nth-child(7),.flex > [data-reveal]:nth-child(7) { transition-delay: 300ms; }
+.grid > [data-reveal]:nth-child(8),.flex > [data-reveal]:nth-child(8) { transition-delay: 350ms; }
+.grid > [data-reveal]:nth-child(9) { transition-delay: 400ms; }
+.grid > [data-reveal]:nth-child(10) { transition-delay: 450ms; }
+.grid > [data-reveal]:nth-child(11) { transition-delay: 500ms; }
+.grid > [data-reveal]:nth-child(12) { transition-delay: 550ms; }
+
+/* Product card image zoom on hover */
+[data-product-id] img { transition: transform .45s cubic-bezier(.22,.61,.36,1); }
+[data-product-id]:hover img { transform: scale(1.06); }
+
+/* Category card icon float on hover */
+.cat-hover-img { transition: transform .35s ease; }
+a:hover > .cat-hover-img { transform: scale(1.08) rotate(-2deg); }
+
+/* Button press feedback */
+.press-fx { transition: transform .15s ease; }
+.press-fx:active { transform: scale(.96); }
+
+/* Entrance gate */
+@keyframes gatePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.045); }
+}
+.gate-enter-btn { animation: gatePulse 1.8s ease-in-out infinite; }
+.gate-enter-btn:hover { animation-play-state: paused; }
+
+#site-gate {
+  --gx: 50%;
+  --gy: 50%;
+  clip-path: circle(150% at var(--gx) var(--gy));
+  transition: clip-path 1s cubic-bezier(.65,0,.35,1);
+}
+#site-gate.gate-open { clip-path: circle(0% at var(--gx) var(--gy)); }
+
+@keyframes ringPing {
+  0% { transform: scale(.75); opacity: .9; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+.gate-ring-pulse { animation: ringPing 2.2s cubic-bezier(0,0,.2,1) infinite; }
+
+@keyframes logoPop {
+  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.18) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.gate-logo-pop { animation: logoPop .85s cubic-bezier(.34,1.56,.64,1) both; }
+
+@keyframes gateFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.gate-fade-up { opacity: 0; animation: gateFadeUp .65s ease .28s both; }
+
+@keyframes auroraFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(24px, -18px) scale(1.12); }
+}
+.gate-orb { animation: auroraFloat 9s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
