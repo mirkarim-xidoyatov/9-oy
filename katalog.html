@@ -2,42 +2,53 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#2563eb" />
 <title>Kataloglar — AutoMart.uz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="animations.css">
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: { brand: { DEFAULT: '#2563eb', dark: '#1d4ed8', light: '#eaf1ff' } },
-        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-      },
-    },
-  };
-</script>
-<style>
-  body { font-family: 'Inter', system-ui, sans-serif; }
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-  .no-scrollbar { scrollbar-width: none; }
-  [hidden] { display: none !important; }
-</style>
+<script src="theme.js"></script>
 </head>
 <body class="bg-white text-gray-900">
 
 <div id="app-header"></div>
 
 <main>
-  <section class="max-w-[1240px] mx-auto px-5 py-8">
-    <h1 id="page-title" class="text-2xl font-extrabold mb-1">Kataloglar</h1>
-    <p id="result-count" class="text-sm text-gray-500 mb-6"></p>
+  <section class="max-w-[1240px] mx-auto px-4 sm:px-5 py-6 sm:py-8">
+    <nav class="text-[13px] text-gray-500 mb-3 flex items-center gap-1.5 flex-wrap" aria-label="Breadcrumb">
+      <a href="index.html" class="hover:text-brand">Bosh sahifa</a>
+      <span class="text-gray-300">/</span>
+      <span id="crumb-current" class="text-gray-700">Kataloglar</span>
+    </nav>
+    <div class="flex items-end justify-between gap-3 mb-5">
+      <div>
+        <h1 id="page-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight">Kataloglar</h1>
+        <p id="result-count" class="text-sm text-gray-500 mt-1"></p>
+      </div>
+    </div>
 
-    <div id="cat-filters" class="flex gap-2 overflow-x-auto no-scrollbar pb-2 mb-6"></div>
+    <div class="lg:grid lg:grid-cols-[240px_1fr] lg:gap-8">
+      <!-- Desktop sidebar -->
+      <aside class="hidden lg:block">
+        <div class="sticky top-[92px] rounded-2xl border border-gray-200 p-3">
+          <div class="px-3 pt-1 pb-2 text-[11px] uppercase tracking-wider font-bold text-gray-400">Toifalar</div>
+          <div id="cat-sidebar" class="flex flex-col gap-0.5"></div>
+        </div>
+      </aside>
 
-    <div id="katalog-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+      <div class="min-w-0">
+        <!-- Mobile / tablet chips -->
+        <div class="lg:hidden -mx-4 sm:-mx-5 px-4 sm:px-5 mb-5">
+          <div id="cat-filters" class="flex gap-2 overflow-x-auto no-scrollbar scroll-row pb-1"></div>
+        </div>
+
+        <div id="katalog-grid" class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4"></div>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -51,39 +62,44 @@
     const q = (qs('q') || '').trim().toLowerCase();
     const filter = qs('filter') || '';
 
-    const chipsWrap = document.getElementById('cat-filters');
-    function chipClass(active) {
-      return active
-        ? 'flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold bg-brand text-white transition-colors'
-        : 'flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors';
-    }
-    const allChip = `<a href="katalog.html" class="${chipClass(!activeCat)}">Barchasi</a>`;
-    const chips = CATEGORIES.map(
-      (c) => `<a href="katalog.html?cat=${c.id}" class="${chipClass(activeCat === c.id)}">${c.name}</a>`
-    );
-    chipsWrap.innerHTML = allChip + chips.join('');
+    const chipClass = (active) => active
+      ? 'flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-[13px] sm:text-sm font-semibold bg-brand text-white shadow-lift transition-colors'
+      : 'flex-shrink-0 whitespace-nowrap px-4 py-2 rounded-full text-[13px] sm:text-sm font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors';
+    const sideClass = (active) => active
+      ? 'flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-semibold bg-brand-light text-brand'
+      : 'flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-brand transition-colors';
+
+    const isDiscount = filter === 'discount' && !activeCat;
+    document.getElementById('cat-filters').innerHTML =
+      `<a href="katalog.html" class="${chipClass(!activeCat && !isDiscount)}">Barchasi</a>` +
+      `<a href="katalog.html?filter=discount" class="${chipClass(isDiscount)}">⚡ Chegirmalar</a>` +
+      CATEGORIES.map((c) => `<a href="katalog.html?cat=${c.id}" class="${chipClass(activeCat === c.id)}">${c.name}</a>`).join('');
+
+    document.getElementById('cat-sidebar').innerHTML =
+      `<a href="katalog.html" class="${sideClass(!activeCat && !isDiscount)}">Barchasi</a>` +
+      `<a href="katalog.html?filter=discount" class="${sideClass(isDiscount)}">⚡ Chegirmalar</a>` +
+      CATEGORIES.map((c) => `<a href="katalog.html?cat=${c.id}" class="${sideClass(activeCat === c.id)}"><img src="${c.img}" alt="" class="w-7 h-7 rounded-md object-cover img-frame" loading="lazy" />${c.name}</a>`).join('');
 
     let list = PRODUCTS.slice();
     if (activeCat) list = list.filter((p) => p.category === activeCat);
-    if (q) {
-      const words = q.split(/\s+/).filter(Boolean);
-      list = list.filter((p) => {
-        const cat = CATEGORIES.find((c) => c.id === p.category);
-        const haystack = (p.name + ' ' + (cat ? cat.name : '')).toLowerCase();
-        return words.every((w) => haystack.includes(w));
-      });
-    }
-    if (filter === 'discount') list = list.slice().sort((a, b) => b.discount - a.discount);
+    if (q) list = searchProducts(q, list);
+    else if (filter === 'discount') list = list.slice().sort((a, b) => b.discount - a.discount);
 
-    const titleEl = document.getElementById('page-title');
-    if (q) titleEl.textContent = `"${q}" bo'yicha qidiruv natijalari`;
-    else if (activeCat) titleEl.textContent = CATEGORIES.find((c) => c.id === activeCat)?.name || 'Kataloglar';
-    else if (filter === 'discount') titleEl.textContent = 'Chegirmalar';
-    else titleEl.textContent = 'Barcha toifalar';
-
+    let title = 'Barcha toifalar';
+    if (q) title = `"${q}" bo'yicha qidiruv`;
+    else if (activeCat) title = CATEGORIES.find((c) => c.id === activeCat)?.name || 'Kataloglar';
+    else if (filter === 'discount') title = 'Chegirmalar';
+    document.getElementById('page-title').textContent = title;
+    document.getElementById('crumb-current').textContent = title;
+    document.title = title + ' — AutoMart.uz';
     document.getElementById('result-count').textContent = `${list.length} ta mahsulot topildi`;
 
-    renderProductGrid(document.getElementById('katalog-grid'), list, "Bu bo'limda hozircha mahsulot yo'q. Boshqa toifani tanlab ko'ring.");
+    renderProductGrid(
+      document.getElementById('katalog-grid'),
+      list,
+      q ? `"${q}" bo'yicha hech narsa topilmadi. Boshqa so'z bilan qidirib ko'ring.` : "Bu bo'limda hozircha mahsulot yo'q. Boshqa toifani tanlab ko'ring.",
+      { href: 'katalog.html', text: 'Barcha mahsulotlar' }
+    );
   });
 </script>
 </body>

@@ -2,78 +2,84 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#2563eb" />
 <title>Mahsulot — AutoMart.uz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="animations.css">
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: { brand: { DEFAULT: '#2563eb', dark: '#1d4ed8', light: '#eaf1ff' } },
-        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-      },
-    },
-  };
-</script>
-<style>
-  body { font-family: 'Inter', system-ui, sans-serif; }
-  [hidden] { display: none !important; }
-</style>
+<script src="theme.js"></script>
 </head>
 <body class="bg-white text-gray-900">
 
 <div id="app-header"></div>
 
 <main>
-  <section id="not-found" hidden class="max-w-[1240px] mx-auto px-5 py-16 text-center text-gray-500">
-    <p class="mb-4 text-lg">Mahsulot topilmadi.</p>
-    <a href="katalog.html" class="inline-block bg-brand hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-[9px] transition-colors">Kataloglarga qaytish</a>
+  <section id="not-found" hidden class="max-w-[1240px] mx-auto px-4 sm:px-5 py-16">
+    <div id="not-found-box"></div>
   </section>
 
-  <section id="product-view" hidden class="max-w-[1240px] mx-auto px-5 py-8">
-    <div id="breadcrumb" class="text-sm text-gray-500 mb-6"></div>
+  <section id="product-view" hidden class="max-w-[1240px] mx-auto px-4 sm:px-5 py-5 sm:py-8">
+    <nav id="breadcrumb" class="text-[13px] text-gray-500 mb-4 sm:mb-6 flex items-center gap-1.5 min-w-0" aria-label="Breadcrumb"></nav>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-      <div class="relative max-w-[420px] mx-auto md:mx-0 w-full">
-        <span id="p-badge" class="absolute top-4 left-4 bg-yellow-400 text-gray-900 text-xs font-extrabold px-2.5 py-1 rounded-lg z-10"></span>
-        <img id="p-img" class="w-full aspect-square object-contain rounded-2xl bg-gray-100 p-6" />
+    <div class="grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-6 sm:gap-8 lg:gap-12">
+      <div class="relative w-full max-w-[520px] mx-auto md:mx-0 md:sticky md:top-[92px] self-start">
+        <span id="p-badge" class="absolute top-4 left-4 bg-yellow-400 text-gray-900 text-xs font-extrabold px-2.5 py-1 rounded-lg z-10 shadow-sm"></span>
+        <div class="rounded-2xl sm:rounded-3xl bg-gray-50 border border-gray-200 p-5 sm:p-8">
+          <img id="p-img" class="w-full aspect-square object-contain" />
+        </div>
       </div>
-      <div>
-        <h1 id="p-name" class="text-2xl font-extrabold mb-3"></h1>
-        <div class="flex items-baseline gap-3 mb-1">
-          <span id="p-price" class="text-3xl font-extrabold text-brand"></span>
-          <span id="p-old-price" class="text-base text-gray-400 line-through"></span>
-        </div>
-        <div id="p-installment" class="text-sm text-gray-500 mb-6"></div>
 
-        <div class="flex flex-wrap items-center gap-3 mb-6">
-          <div class="flex items-center gap-1 border border-gray-200 rounded-lg">
-            <button id="qty-minus" class="w-10 h-10 flex items-center justify-center text-lg text-gray-600 hover:text-brand">−</button>
-            <span id="qty-val" class="w-8 text-center font-semibold">1</span>
-            <button id="qty-plus" class="w-10 h-10 flex items-center justify-center text-lg text-gray-600 hover:text-brand">+</button>
-          </div>
-          <button id="add-cart" class="flex-1 bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-[10px] flex items-center justify-center gap-2 transition-colors">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/><path d="M2.5 3h2.4l2.1 11.3a2 2 0 0 0 2 1.7h8.2a2 2 0 0 0 2-1.6L21 7.5H6.2"/></svg>
-            Savatga qo'shish
-          </button>
-          <button id="fav-toggle" class="w-12 h-12 rounded-lg border border-gray-200 flex items-center justify-center flex-shrink-0 text-gray-400" aria-label="Sevimlilarga qo'shish">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20.5S3.5 15 3.5 8.9A4.4 4.4 0 0 1 12 6.6a4.4 4.4 0 0 1 8.5 2.3C20.5 15 12 20.5 12 20.5Z"/></svg>
-          </button>
+      <div class="min-w-0">
+        <div id="p-cat" class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-brand bg-brand-light px-2.5 py-1 rounded-full mb-3"></div>
+        <h1 id="p-name" class="text-xl sm:text-2xl lg:text-[28px] font-extrabold leading-tight tracking-tight mb-4 text-balance"></h1>
+
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1 tabular">
+          <span id="p-price" class="text-3xl sm:text-[34px] font-extrabold text-gray-900"></span>
+          <span id="p-old-price" class="text-base text-gray-400 line-through"></span>
+          <span id="p-save" class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md"></span>
         </div>
+        <div id="p-installment" class="text-sm text-gray-500 mb-6 tabular"></div>
+
+        <div class="flex flex-col xs:flex-row xs:flex-wrap items-stretch xs:items-center gap-3 mb-6">
+          <div class="flex items-center border border-gray-200 rounded-xl h-12 self-start xs:self-auto">
+            <button id="qty-minus" class="w-11 h-full flex items-center justify-center text-xl text-gray-600 hover:text-brand hover:bg-gray-50 rounded-l-xl transition-colors" aria-label="Kamaytirish">−</button>
+            <span id="qty-val" class="w-10 text-center font-bold tabular">1</span>
+            <button id="qty-plus" class="w-11 h-full flex items-center justify-center text-xl text-gray-600 hover:text-brand hover:bg-gray-50 rounded-r-xl transition-colors" aria-label="Ko'paytirish">+</button>
+          </div>
+          <div class="flex items-center gap-3 flex-1">
+            <button id="add-cart" class="ripple-host btn-shine press-fx flex-1 h-12 bg-brand hover:bg-brand-dark text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lift">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/><path d="M2.5 3h2.4l2.1 11.3a2 2 0 0 0 2 1.7h8.2a2 2 0 0 0 2-1.6L21 7.5H6.2"/></svg>
+              Savatga qo'shish
+            </button>
+            <button id="fav-toggle" class="press-fx w-12 h-12 rounded-xl border border-gray-200 hover:border-brand flex items-center justify-center flex-shrink-0 text-gray-400 transition-colors" aria-label="Sevimlilarga qo'shish">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20.5S3.5 15 3.5 8.9A4.4 4.4 0 0 1 12 6.6a4.4 4.4 0 0 1 8.5 2.3C20.5 15 12 20.5 12 20.5Z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <ul class="grid grid-cols-1 xs:grid-cols-2 gap-2.5 mb-6 text-[13px] text-gray-700">
+          <li class="rounded-xl bg-gray-50 border border-gray-200 px-3.5 py-2.5"><span class="block text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-0.5">Yetkazib berish</span>Toshkentda 1-2 kunda</li>
+          <li class="rounded-xl bg-gray-50 border border-gray-200 px-3.5 py-2.5"><span class="block text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-0.5">Kafolat</span>Original mahsulot</li>
+          <li class="rounded-xl bg-gray-50 border border-gray-200 px-3.5 py-2.5"><span class="block text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-0.5">To'lov</span>Karta yoki 12 oy muddatli</li>
+          <li class="rounded-xl bg-gray-50 border border-gray-200 px-3.5 py-2.5"><span class="block text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-0.5">Yordam</span>Telegram orqali 24/7</li>
+        </ul>
 
         <div class="border-t border-gray-200 pt-5 text-sm text-gray-600 leading-relaxed">
-          Original ehtiyot qism, AutoMart.uz orqali kafolat bilan sotiladi. Toshkent bo'ylab 1-2 kun ichida yetkazib beramiz.
+          Original ehtiyot qism, AutoMart.uz orqali kafolat bilan sotiladi. Buyurtma rasmiylashtirilgach menejerimiz siz bilan bog'lanadi va yetkazib berish vaqtini aniqlashtiradi.
         </div>
       </div>
     </div>
 
-    <div class="mt-14">
-      <h2 class="text-xl font-extrabold mb-4">Shunga o'xshash mahsulotlar</h2>
-      <div id="related-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
+    <div class="mt-12 sm:mt-16">
+      <div class="flex items-end justify-between gap-3 mb-4">
+        <h2 class="text-xl sm:text-[22px] font-extrabold">Shunga o'xshash mahsulotlar</h2>
+        <a id="related-link" href="katalog.html" class="text-sm font-semibold text-brand hover:underline whitespace-nowrap">Barchasi →</a>
+      </div>
+      <div id="related-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"></div>
     </div>
   </section>
 </main>
@@ -89,6 +95,7 @@
 
     if (!product) {
       document.getElementById('not-found').hidden = false;
+      document.getElementById('not-found-box').innerHTML = emptyStateHTML('Mahsulot topilmadi.', { href: 'katalog.html', text: 'Kataloglarga qaytish' });
       return;
     }
     document.getElementById('product-view').hidden = false;
@@ -96,7 +103,11 @@
 
     const cat = CATEGORIES.find((c) => c.id === product.category);
     document.getElementById('breadcrumb').innerHTML =
-      `<a href="katalog.html" class="hover:text-brand">Kataloglar</a> / <a href="katalog.html?cat=${product.category}" class="hover:text-brand">${cat ? cat.name : ''}</a> / <span class="text-gray-700">${product.name}</span>`;
+      `<a href="index.html" class="hover:text-brand flex-shrink-0">Bosh sahifa</a><span class="text-gray-300">/</span>` +
+      `<a href="katalog.html?cat=${product.category}" class="hover:text-brand flex-shrink-0">${cat ? cat.name : 'Kataloglar'}</a><span class="text-gray-300">/</span>` +
+      `<span class="text-gray-700 truncate">${product.name}</span>`;
+    document.getElementById('p-cat').textContent = cat ? cat.name : '';
+    document.getElementById('related-link').href = `katalog.html?cat=${product.category}`;
 
     document.getElementById('p-badge').textContent = `-${product.discount}%`;
     document.getElementById('p-img').src = product.img;
@@ -104,7 +115,8 @@
     document.getElementById('p-name').textContent = product.name;
     document.getElementById('p-price').textContent = money(product.price);
     document.getElementById('p-old-price').textContent = money(product.oldPrice);
-    document.getElementById('p-installment').textContent = `${money(Math.round(product.price / 12))} x 12 oy muddatli to'lovda`;
+    document.getElementById('p-save').textContent = `Tejaysiz: ${money(product.oldPrice - product.price)}`;
+    document.getElementById('p-installment').textContent = `${money(Math.round(product.price / 12))} × 12 oy muddatli to'lovda`;
 
     let qty = 1;
     const qtyEl = document.getElementById('qty-val');
@@ -112,11 +124,18 @@
     document.getElementById('qty-plus').addEventListener('click', () => { qty += 1; qtyEl.textContent = qty; });
 
     const addBtn = document.getElementById('add-cart');
-    addBtn.addEventListener('click', () => {
+    addBtn.addEventListener('click', (e) => {
+      rippleAt(e, addBtn);
+      flyToCart(document.getElementById('p-img'));
+      showToast(`Buyurtmangiz qabul qilindi (${qty} dona)`, product.img, 'success');
       addToCart(product.id, qty);
       const original = addBtn.innerHTML;
       addBtn.innerHTML = "Qo'shildi ✓";
-      setTimeout(() => { addBtn.innerHTML = original; }, 1200);
+      addBtn.classList.add('bg-green-600', 'hover:bg-green-600', 'animate-pop');
+      setTimeout(() => {
+        addBtn.innerHTML = original;
+        addBtn.classList.remove('bg-green-600', 'hover:bg-green-600', 'animate-pop');
+      }, 60000);
     });
 
     const favBtn = document.getElementById('fav-toggle');
@@ -124,11 +143,17 @@
       const active = isFavorite(product.id);
       favBtn.classList.toggle('text-brand', active);
       favBtn.classList.toggle('border-brand', active);
+      favBtn.classList.toggle('bg-brand-light', active);
       favBtn.classList.toggle('text-gray-400', !active);
       favBtn.querySelector('svg').setAttribute('fill', active ? 'currentColor' : 'none');
     }
     paintFav();
-    favBtn.addEventListener('click', () => { toggleFavorite(product.id); paintFav(); });
+    favBtn.addEventListener('click', () => {
+      toggleFavorite(product.id);
+      paintFav();
+      favBtn.classList.remove('animate-pop'); void favBtn.offsetWidth; favBtn.classList.add('animate-pop');
+      showToast(isFavorite(product.id) ? "Sevimlilarga qo'shildi" : "Sevimlilardan olib tashlandi");
+    });
 
     const related = PRODUCTS.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
     renderProductGrid(document.getElementById('related-grid'), related, "O'xshash mahsulot topilmadi.");

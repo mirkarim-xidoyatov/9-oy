@@ -2,63 +2,59 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#2563eb" />
 <title>Profil — AutoMart.uz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="animations.css">
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: { brand: { DEFAULT: '#2563eb', dark: '#1d4ed8', light: '#eaf1ff' } },
-        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-      },
-    },
-  };
-</script>
-<style>
-  body { font-family: 'Inter', system-ui, sans-serif; }
-  [hidden] { display: none !important; }
-</style>
+<script src="theme.js"></script>
 </head>
 <body class="bg-white text-gray-900">
 
 <div id="app-header"></div>
 
 <main>
-  <section class="max-w-[560px] mx-auto px-5 py-8">
-    <h1 class="text-2xl font-extrabold mb-6">Profil</h1>
+  <section class="max-w-[600px] mx-auto px-4 sm:px-5 py-6 sm:py-10">
+    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1">Profil</h1>
+    <p class="text-sm text-gray-500 mb-6">Buyurtma berishda ma'lumotlaringiz avtomatik to'ldiriladi.</p>
 
-    <div id="profile-view" hidden class="border border-gray-200 rounded-2xl p-6">
+    <div id="profile-view" hidden class="border border-gray-200 rounded-2xl p-5 sm:p-6 shadow-card">
       <div class="flex items-center gap-4 mb-5">
-        <div class="w-14 h-14 rounded-full bg-brand text-white flex items-center justify-center font-extrabold text-xl" id="profile-initial">A</div>
-        <div>
-          <div id="profile-name" class="font-bold text-lg"></div>
-          <div id="profile-phone" class="text-sm text-gray-500"></div>
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-brand to-indigo-500 text-white flex items-center justify-center font-extrabold text-xl sm:text-2xl flex-shrink-0" id="profile-initial">A</div>
+        <div class="min-w-0">
+          <div id="profile-name" class="font-bold text-lg truncate"></div>
+          <div id="profile-phone" class="text-sm text-gray-500 tabular"></div>
+          <div id="profile-email" class="text-sm text-gray-500 truncate"></div>
         </div>
       </div>
-      <div class="text-sm text-gray-600 mb-5" id="profile-email"></div>
-      <button id="edit-profile" class="text-sm font-semibold text-brand hover:underline mr-4">Tahrirlash</button>
-      <button id="logout-profile" class="text-sm font-semibold text-gray-500 hover:text-brand">Chiqish</button>
+      <div class="grid grid-cols-2 gap-2.5 mb-5">
+        <a href="buyurtmalar.html" class="rounded-xl bg-gray-50 border border-gray-200 hover:border-brand hover:text-brand px-4 py-3 text-sm font-semibold transition-colors">Buyurtmalarim</a>
+        <a href="garaj.html" class="rounded-xl bg-gray-50 border border-gray-200 hover:border-brand hover:text-brand px-4 py-3 text-sm font-semibold transition-colors">Mening garajim</a>
+      </div>
+      <div class="flex items-center gap-4 border-t border-gray-100 pt-4">
+        <button id="edit-profile" class="text-sm font-semibold text-brand hover:underline">Tahrirlash</button>
+        <button id="logout-profile" class="text-sm font-semibold text-gray-500 hover:text-red-500 transition-colors">Chiqish</button>
+      </div>
     </div>
 
-    <form id="profile-form" class="border border-gray-200 rounded-2xl p-6 flex flex-col gap-4">
+    <form id="profile-form" class="border border-gray-200 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-card">
       <div>
-        <label class="text-sm font-semibold mb-1.5 block">Ism familiya</label>
-        <input id="p-name" required placeholder="Masalan: Aziz Muminov" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-brand" />
+        <label for="p-name" class="text-sm font-semibold mb-1.5 block">Ism familiya</label>
+        <input id="p-name" required autocomplete="name" placeholder="Masalan: Aziz Muminov" class="w-full h-11 bg-gray-50 border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10 transition" />
       </div>
       <div>
-        <label class="text-sm font-semibold mb-1.5 block">Telefon raqam</label>
-        <input id="p-phone" required placeholder="+998 90 123 45 67" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-brand" />
+        <label for="p-phone" class="text-sm font-semibold mb-1.5 block">Telefon raqam</label>
+        <input id="p-phone" required type="tel" inputmode="tel" autocomplete="tel" placeholder="+998 90 123 45 67" class="w-full h-11 bg-gray-50 border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10 transition tabular" />
       </div>
       <div>
-        <label class="text-sm font-semibold mb-1.5 block">Email (ixtiyoriy)</label>
-        <input id="p-email" type="email" placeholder="email@misol.uz" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-brand" />
+        <label for="p-email" class="text-sm font-semibold mb-1.5 block">Email <span class="text-gray-400 font-normal">(ixtiyoriy)</span></label>
+        <input id="p-email" type="email" inputmode="email" autocomplete="email" placeholder="email@misol.uz" class="w-full h-11 bg-gray-50 border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10 transition" />
       </div>
-      <button type="submit" class="bg-brand hover:bg-brand-dark text-white font-bold py-3 rounded-lg transition-colors mt-2">Saqlash</button>
+      <button type="submit" class="press-fx h-12 bg-brand hover:bg-brand-dark text-white font-bold rounded-xl transition-colors mt-1 shadow-lift">Saqlash</button>
     </form>
   </section>
 </main>

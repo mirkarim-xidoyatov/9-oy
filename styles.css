@@ -1,0 +1,99 @@
+/* AutoMart.uz — shared base styles (loaded on every page) */
+
+:root {
+  --bottom-nav-h: 62px;
+  --container: 1240px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  min-width: 0;
+  overflow-x: clip;
+}
+main, header, footer, #app-header, #app-footer { overflow-x: clip; }
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+button, input, select, textarea { font: inherit; }
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* Entrance gate — critical styles (must work before Tailwind CDN runs) */
+/* Zero-specificity (:where) so Tailwind classes take over once loaded */
+:where(#site-gate) {
+  position: fixed; inset: 0; z-index: 100; overflow: hidden;
+  background: linear-gradient(180deg, #fbfcff 0%, #f3f6fc 100%);
+}
+:where(#site-gate .gate-orb, #site-gate .gate-grid) { position: absolute; }
+:where(#site-gate .gate-wrap) { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 0 16px; }
+:where(#site-gate .gate-card) {
+  width: 100%; max-width: 520px; text-align: center;
+  background: rgba(255,255,255,.75); border-radius: 28px; padding: 32px 20px;
+}
+:where(#site-gate .gate-pics) { display: flex; justify-content: center; align-items: flex-end; gap: 10px; margin-bottom: 24px; }
+:where(#site-gate .gate-pic) { width: 80px; height: 80px; object-fit: contain; border-radius: 16px; background: #fff; }
+:where(#site-gate h1) { font-size: 30px; font-weight: 800; margin: 0 0 6px; color: #111827; }
+:where(#site-gate p) { color: #6b7280; margin: 0 0 20px; }
+:where(#site-gate #gate-enter) { display: inline-block; background-color: #2563eb; color: #fff; font-weight: 700; padding: 16px 40px; border-radius: 16px; border: 0; cursor: pointer; }
+
+/* Mobile bottom nav clearance */
+@media (max-width: 767px) {
+  body { padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* Accessible focus */
+:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; border-radius: 6px; }
+:focus:not(:focus-visible) { outline: none; }
+
+/* Hide scrollbars for horizontal chip rows */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+
+/* Horizontal scroll rows: snap + edge fade */
+.scroll-row { scroll-snap-type: x proximity; overscroll-behavior-x: contain; }
+.scroll-row > * { scroll-snap-align: start; }
+.fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 24px), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 24px), transparent 100%);
+}
+
+/* Brands marquee */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 26s linear infinite; }
+.marquee-pause:hover .animate-marquee { animation-play-state: paused; }
+
+/* Text helpers */
+.text-balance { text-wrap: balance; }
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Image placeholders */
+.img-frame { background: linear-gradient(135deg, #f3f4f6, #e5e7eb); }
+
+/* Mobile menu drawer */
+.mmenu { pointer-events: none; }
+.mmenu.open { pointer-events: auto; }
+.mmenu-overlay { opacity: 0; transition: opacity .3s ease; }
+.mmenu.open .mmenu-overlay { opacity: 1; }
+.mmenu-panel { transform: translateX(100%); transition: transform .38s cubic-bezier(.22,.61,.36,1); }
+.mmenu.open .mmenu-panel { transform: translateX(0); }
+body.menu-open { overflow: hidden; }
+
+/* Bottom nav active pill */
+.bnav-item.active { color: #2563eb; }
+.bnav-item.active .bnav-ico { background: #eaf1ff; }
+
+/* Sticky header glass */
+.header-glass { background: rgba(255,255,255,.88); backdrop-filter: saturate(160%) blur(12px); -webkit-backdrop-filter: saturate(160%) blur(12px); }
+
+/* Prose for info pages */
+.prose-uz p { margin-bottom: 1rem; }

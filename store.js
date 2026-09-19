@@ -90,16 +90,34 @@ const PRODUCTS = [
   { id: 'tool-oil-pump-avtodelo', name: "Moy quyish pompasi (bochkadan)", img: 'https://exzap.uz/photo_upload/6046z_1.webp', price: 279000, oldPrice: 307000, discount: 9, category: 'tools' },
 
   // Aksessuarlar
-  { id: 'acc-charger-lixiang', name: 'Portativ zaryadlovchi qurilma, LiXiang', img: 'https://exzap.uz/photo_upload/17809z_1.webp', price: 2064000, oldPrice: 2220000, discount: 7, category: 'accessories' },
+  { id: 'acc-wiper-bosch-aerotwin-650', name: "Oyna tozalagich cho'tkasi BOSCH AEROTWIN, 650 mm", img: 'https://exzap.uz/photo_upload/4371z_1.webp', price: 238000, oldPrice: 264000, discount: 10, category: 'accessories' },
+  { id: 'acc-wiper-bosch-twin-640', name: "Oyna tozalagich cho'tkasi BOSCH TWIN, 640 mm", img: 'https://exzap.uz/photo_upload/4340z_1.webp', price: 134000, oldPrice: 152000, discount: 12, category: 'accessories' },
+  { id: 'acc-wiper-bosch-eco-600', name: "Oyna tozalagich cho'tkasi BOSCH ECO, 600 mm", img: 'https://exzap.uz/photo_upload/4359z_1.webp', price: 47000, oldPrice: 55000, discount: 15, category: 'accessories' },
+  { id: 'acc-wiper-bosch-eco-500', name: "Oyna tozalagich cho'tkasi BOSCH ECO, 500 mm", img: 'https://exzap.uz/photo_upload/4357z_1.webp', price: 40000, oldPrice: 46000, discount: 13, category: 'accessories' },
+  { id: 'acc-wiper-bosch-eco-450', name: "Oyna tozalagich cho'tkasi BOSCH ECO, 450 mm", img: 'https://exzap.uz/photo_upload/4355z_1.webp', price: 36000, oldPrice: 42000, discount: 14, category: 'accessories' },
+  { id: 'acc-wiper-valeo-cobalt-600', name: "Oyna tozalagich cho'tkasi VALEO, Cobalt 600 mm", img: 'https://exzap.uz/photo_upload/3079z_1.webp', price: 59000, oldPrice: 66000, discount: 11, category: 'accessories' },
+  { id: 'acc-wiper-valeo-nexia-450', name: "Oyna tozalagich cho'tkasi VALEO, Nexia 450 mm", img: 'https://exzap.uz/photo_upload/0237z_1.webp', price: 36000, oldPrice: 41000, discount: 12, category: 'accessories' },
+  { id: 'acc-wiper-valeo-lacetti-500', name: "Oyna tozalagich cho'tkasi VALEO, Lacetti 500 mm", img: 'https://exzap.uz/photo_upload/0238z_1.webp', price: 37000, oldPrice: 42000, discount: 12, category: 'accessories' },
+  { id: 'acc-mats-lixiang-l6', name: "Salon gilamchalari to'plami (rezina), LiXiang L6", img: 'https://exzap.uz/photo_upload/17687z_1.webp', price: 2161000, oldPrice: 2349000, discount: 8, category: 'accessories' },
+  { id: 'acc-mats-lixiang-l7', name: "Salon gilamchalari to'plami (rezina), LiXiang L7", img: 'https://exzap.uz/photo_upload/17689z_1.webp', price: 2294000, oldPrice: 2467000, discount: 7, category: 'accessories' },
+  { id: 'acc-charger-lixiang', name: "Portativ zaryadlovchi qurilma, LiXiang", img: 'https://exzap.uz/photo_upload/17809z_1.webp', price: 2064000, oldPrice: 2219000, discount: 7, category: 'accessories' },
+  { id: 'acc-home-charger-lixiang', name: "Uy zaryadlovchi qurilmasi (Wallbox), LiXiang L6/7/8/9", img: 'https://exzap.uz/photo_upload/17666z_1.webp', price: 5920000, oldPrice: 6298000, discount: 6, category: 'accessories' },
+  { id: 'acc-charger-stand-lixiang', name: "Zaryadlovchi qurilma stoykasi, LiXiang", img: 'https://exzap.uz/photo_upload/19144z_1.webp', price: 1480000, oldPrice: 1626000, discount: 9, category: 'accessories' },
+  { id: 'acc-charge-port-cap-lixiang', name: "Zaryad porti qopqog'i, LiXiang L6/7/8/9", img: 'https://exzap.uz/photo_upload/18872z_1.webp', price: 222000, oldPrice: 247000, discount: 10, category: 'accessories' },
+  { id: 'acc-charge-port-lamp-byd-song', name: "Zaryad porti chirog'i, BYD Song L", img: 'https://exzap.uz/photo_upload/18598z_1.webp', price: 74000, oldPrice: 84000, discount: 12, category: 'accessories' },
   { id: 'acc-wheel-cap-lixiang', name: "G'ildirak diski qopqog'i, LiXiang", img: 'https://exzap.uz/photo_upload/17750z_1.webp', price: 45000, oldPrice: 51000, discount: 12, category: 'accessories' },
   { id: 'acc-mudflaps-lixiang-l9', name: "Loy tutgichlar to'plami, LiXiang L9", img: 'https://exzap.uz/photo_upload/17644z_1.webp', price: 133000, oldPrice: 148000, discount: 10, category: 'accessories' },
-  { id: 'acc-air-mattress-lixiang-l9', name: 'Shishiriladigan matras (avtomobil uchun), LiXiang L9', img: 'https://exzap.uz/photo_upload/17754z_1.webp', price: 2948000, oldPrice: 3136000, discount: 6, category: 'accessories' },
-  { id: 'acc-trash-bag-lixiang', name: "Magnitli axlat qopi, LiXiang", img: 'https://exzap.uz/photo_upload/17756z_1.webp', price: 339000, oldPrice: 375000, discount: 10, category: 'accessories' },
+  { id: 'acc-mudflaps-lixiang-l7', name: "Loy tutgichlar to'plami, LiXiang L7", img: 'https://exzap.uz/photo_upload/17645z_1.webp', price: 134000, oldPrice: 149000, discount: 10, category: 'accessories' },
   { id: 'acc-mudflaps-lixiang-l6', name: "Loy tutgichlar to'plami, LiXiang L6", img: 'https://exzap.uz/photo_upload/17648z_1.webp', price: 148000, oldPrice: 166000, discount: 11, category: 'accessories' },
-  { id: 'acc-rear-camera-lixiang', name: "Orqa ko'rish kamerasi, LiXiang L7/8/9", img: 'https://exzap.uz/photo_upload/17682z_1.webp', price: 1003000, oldPrice: 1096000, discount: 8, category: 'accessories' },
+  { id: 'acc-air-mattress-lixiang-l9', name: "Shishiriladigan matras (avtomobil uchun), LiXiang L9", img: 'https://exzap.uz/photo_upload/17754z_1.webp', price: 2948000, oldPrice: 3136000, discount: 6, category: 'accessories' },
+  { id: 'acc-air-mattress-lixiang-l7', name: "Shishiriladigan matras (avtomobil uchun), LiXiang L7", img: 'https://exzap.uz/photo_upload/17755z_1.webp', price: 2960000, oldPrice: 3149000, discount: 6, category: 'accessories' },
+  { id: 'acc-tent-lixiang', name: "Avtomobil chodiri (palatka), LiXiang L6/7/8/9", img: 'https://exzap.uz/photo_upload/17803z_1.webp', price: 5180000, oldPrice: 5453000, discount: 5, category: 'accessories' },
+  { id: 'acc-trash-bag-lixiang', name: "Magnitli axlat qopi, LiXiang", img: 'https://exzap.uz/photo_upload/17756z_1.webp', price: 339000, oldPrice: 377000, discount: 10, category: 'accessories' },
+  { id: 'acc-rear-camera-lixiang', name: "Orqa ko'rish kamerasi, LiXiang L7/8/9", img: 'https://exzap.uz/photo_upload/17682z_1.webp', price: 1003000, oldPrice: 1090000, discount: 8, category: 'accessories' },
   { id: 'acc-rear-camera-byd-e2', name: "Orqa ko'rish kamerasi, BYD E2", img: 'https://exzap.uz/photo_upload/17449z_1.webp', price: 310000, oldPrice: 352000, discount: 12, category: 'accessories' },
-  { id: 'acc-side-camera-lixiang', name: "Yon kamera (chap), LiXiang L7/8/9", img: 'https://exzap.uz/photo_upload/18776z_1.webp', price: 1916000, oldPrice: 2090000, discount: 8, category: 'accessories' },
-  { id: 'acc-bt-key-lixiang', name: "Bluetooth kalit, LiXiang L6/7/8/9", img: 'https://exzap.uz/photo_upload/18782z_1.webp', price: 1121000, oldPrice: 1235000, discount: 9, category: 'accessories' },
+  { id: 'acc-side-camera-lixiang', name: "Yon kamera (chap), LiXiang L7/8/9", img: 'https://exzap.uz/photo_upload/18776z_1.webp', price: 1916000, oldPrice: 2083000, discount: 8, category: 'accessories' },
+  { id: 'acc-side-camera-right-lixiang', name: "Yon kamera (o'ng), LiXiang L7/8/9", img: 'https://exzap.uz/photo_upload/18777z_1.webp', price: 1924000, oldPrice: 2091000, discount: 8, category: 'accessories' },
+  { id: 'acc-bt-key-lixiang', name: "Bluetooth kalit, LiXiang L6/7/8/9", img: 'https://exzap.uz/photo_upload/18782z_1.webp', price: 1121000, oldPrice: 1232000, discount: 9, category: 'accessories' },
 
   // Avtokimyo
   { id: 'chem-moisture-remover-petrol', name: "Namlik tozalagich (benzinli dvigatel uchun), 150ml", img: 'https://exzap.uz/photo_upload/12476m_1.webp', price: 60000, oldPrice: 70000, discount: 14, category: 'chemicals' },
@@ -125,6 +143,59 @@ function money(n) {
 
 function qs(name) {
   return new URLSearchParams(window.location.search).get(name);
+}
+
+// ---- Search (ranked, works from a single letter) ----
+function normText(str) {
+  return String(str || '')
+    .toLowerCase()
+    .replace(/[‘’`ʻʼ']/g, "'")
+    .replace(/o'/g, 'o').replace(/g'/g, 'g')
+    .replace(/[^a-z0-9а-яё\s\/\-\.]/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+function editDistance(a, b) {
+  const m = a.length, n = b.length;
+  if (!m) return n; if (!n) return m;
+  const prev = Array.from({ length: n + 1 }, (_, i) => i);
+  for (let i = 1; i <= m; i++) {
+    let last = prev[0]; prev[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const tmp = prev[j];
+      prev[j] = Math.min(prev[j] + 1, prev[j - 1] + 1, last + (a[i - 1] === b[j - 1] ? 0 : 1));
+      last = tmp;
+    }
+  }
+  return prev[n];
+}
+function scoreProduct(p, tokens) {
+  const cat = CATEGORIES.find((c) => c.id === p.category);
+  const name = normText(p.name);
+  const catName = normText(cat ? cat.name : '');
+  const words = name.split(/[\s\/\-,]+/).filter(Boolean);
+  let score = 0;
+  for (const t of tokens) {
+    let best = 0;
+    if (name.startsWith(t)) best = 10;
+    else if (words.some((w) => w.startsWith(t))) best = 7;
+    else if (name.includes(t)) best = 4;
+    else if (t.length >= 4 && words.some((w) => Math.abs(w.length - t.length) <= 2 && editDistance(w, t) <= 1)) best = 3;
+    if (catName.includes(t)) best = Math.max(best, catName.startsWith(t) ? 5 : 3);
+    score += best;
+  }
+  return score;
+}
+function searchProducts(query, list) {
+  const q = normText(query);
+  const src = list || PRODUCTS;
+  if (!q) return src.slice();
+  const tokens = q.split(' ').filter(Boolean);
+  return src
+    .map((p) => ({ p, s: scoreProduct(p, tokens) }))
+    .filter((x) => x.s > 0)
+    .sort((a, b) => b.s - a.s || b.p.discount - a.p.discount)
+    .map((x) => x.p);
 }
 
 function readJSON(key, fallback) {

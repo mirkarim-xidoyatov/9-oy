@@ -2,46 +2,44 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#2563eb" />
 <title>Mening Garajim — AutoMart.uz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="animations.css">
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: { brand: { DEFAULT: '#2563eb', dark: '#1d4ed8', light: '#eaf1ff' } },
-        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-      },
-    },
-  };
-</script>
-<style>
-  body { font-family: 'Inter', system-ui, sans-serif; }
-  [hidden] { display: none !important; }
-</style>
+<script src="theme.js"></script>
 </head>
 <body class="bg-white text-gray-900">
 
 <div id="app-header"></div>
 
 <main>
-  <section class="max-w-[1240px] mx-auto px-5 py-8">
-    <h1 class="text-2xl font-extrabold mb-1">Mening Garajim</h1>
-    <p class="text-sm text-gray-500 mb-6">Avtomobillaringizni qo'shing — ularga mos ehtiyot qismlarni tezroq topasiz.</p>
+  <section class="max-w-[1240px] mx-auto px-4 sm:px-5 py-6 sm:py-8">
+    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1">Mening Garajim</h1>
+    <p class="text-sm text-gray-500 mb-6 max-w-[520px]">Avtomobillaringizni qo'shing — ularga mos ehtiyot qismlarni tezroq topasiz.</p>
 
-    <form id="vehicle-form" class="flex flex-wrap gap-3 bg-gray-50 border border-gray-200 rounded-2xl p-5 mb-8">
-      <input id="v-marka" required placeholder="Marka (masalan: Chevrolet)" class="flex-1 min-w-[160px] bg-white border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-brand" />
-      <input id="v-model" required placeholder="Model (masalan: Cobalt)" class="flex-1 min-w-[160px] bg-white border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-brand" />
-      <input id="v-yil" required type="number" min="1970" max="2100" placeholder="Yili" class="w-28 bg-white border border-gray-200 rounded-lg px-3.5 py-2.5 text-sm outline-none focus:border-brand" />
-      <button type="submit" class="bg-brand hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-lg transition-colors">Qo'shish</button>
+    <form id="vehicle-form" class="grid grid-cols-1 sm:grid-cols-[1fr_1fr_120px_auto] gap-3 bg-gray-50 border border-gray-200 rounded-2xl p-4 sm:p-5 mb-8">
+      <label class="block">
+        <span class="block text-[12px] font-semibold text-gray-500 mb-1.5">Marka</span>
+        <input id="v-marka" required placeholder="Masalan: Chevrolet" class="w-full h-11 bg-white border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:ring-4 focus:ring-brand/10 transition" />
+      </label>
+      <label class="block">
+        <span class="block text-[12px] font-semibold text-gray-500 mb-1.5">Model</span>
+        <input id="v-model" required placeholder="Masalan: Cobalt" class="w-full h-11 bg-white border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:ring-4 focus:ring-brand/10 transition" />
+      </label>
+      <label class="block">
+        <span class="block text-[12px] font-semibold text-gray-500 mb-1.5">Yili</span>
+        <input id="v-yil" required type="number" inputmode="numeric" min="1970" max="2100" placeholder="2020" class="w-full h-11 bg-white border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:ring-4 focus:ring-brand/10 transition tabular" />
+      </label>
+      <button type="submit" class="press-fx h-11 self-end bg-brand hover:bg-brand-dark text-white font-bold px-6 rounded-xl transition-colors shadow-lift">Qo'shish</button>
     </form>
 
-    <div id="garage-empty" hidden class="text-center py-16 text-gray-500">Hozircha avtomobil qo'shilmagan.</div>
-    <div id="garage-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
+    <div id="garage-empty" hidden></div>
+    <div id="garage-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
   </section>
 </main>
 
@@ -51,15 +49,16 @@
 <script src="components.js"></script>
 <script>
   function vehicleCardHTML(v) {
-    return `<div class="border border-gray-200 rounded-2xl p-5 flex items-center gap-4" data-id="${v.id}">
+    return `<div class="group border border-gray-200 hover:border-brand/40 hover:shadow-card rounded-2xl p-4 sm:p-5 flex items-center gap-4 transition" data-id="${v.id}">
       <div class="w-12 h-12 rounded-xl bg-brand-light text-brand flex items-center justify-center flex-shrink-0">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12l1.5-4.5A2 2 0 0 1 6.4 6h11.2a2 2 0 0 1 1.9 1.5L21 12"/><rect x="2.5" y="12" width="19" height="6" rx="1.5"/><circle cx="7" cy="18.5" r="1.5"/><circle cx="17" cy="18.5" r="1.5"/></svg>
       </div>
       <div class="flex-1 min-w-0">
-        <div class="font-semibold text-sm truncate">${v.marka} ${v.model}</div>
-        <div class="text-xs text-gray-500">${v.yil}-yil</div>
+        <div class="font-bold text-[15px] truncate">${v.marka} ${v.model}</div>
+        <div class="text-xs text-gray-500 mt-0.5">${v.yil}-yil</div>
+        <a href="katalog.html?q=${encodeURIComponent(v.model)}" class="inline-flex mt-2 text-[12.5px] font-semibold text-brand hover:underline">Mos qismlarni ko'rish →</a>
       </div>
-      <button class="remove-vehicle text-gray-400 hover:text-brand w-8 h-8 flex items-center justify-center flex-shrink-0" aria-label="O'chirish">
+      <button class="remove-vehicle text-gray-400 hover:text-red-500 hover:bg-red-50 w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors" aria-label="O'chirish">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0-1 13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1L6 7"/></svg>
       </button>
     </div>`;
@@ -67,7 +66,9 @@
 
   function renderGarage() {
     const list = getGarage();
-    document.getElementById('garage-empty').hidden = list.length > 0;
+    const empty = document.getElementById('garage-empty');
+    empty.hidden = list.length > 0;
+    if (!list.length) empty.innerHTML = emptyStateHTML("Hozircha avtomobil qo'shilmagan. Yuqoridagi forma orqali birinchi mashinangizni qo'shing.");
     const wrap = document.getElementById('garage-list');
     wrap.innerHTML = list.map(vehicleCardHTML).join('');
     wrap.querySelectorAll('.remove-vehicle').forEach((btn) => {
