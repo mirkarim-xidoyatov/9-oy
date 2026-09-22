@@ -14,7 +14,17 @@ const ICONS = {
   chevron: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg>',
   pin: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7.58 7-12.5A7 7 0 0 0 5 9.5C5 14.42 12 22 12 22Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
   bolt: '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>',
+  sun: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.5 12H2.1M21.9 12h-2.4M5.6 5.6l1.7 1.7M16.7 16.7l1.7 1.7M18.4 5.6l-1.7 1.7M7.3 16.7l-1.7 1.7"/></svg>',
+  moon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11Z"/></svg>',
 };
+
+function themeToggleHTML(size) {
+  const box = size === 'sm' ? 'w-10 h-10' : 'w-9 h-9';
+  return `<button type="button" class="js-theme-toggle press-fx relative flex-shrink-0 ${box} rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 text-white transition-colors" aria-label="Rejimni almashtirish" aria-pressed="false">
+    <span class="theme-ico-sun hidden dark:flex">${ICONS.sun}</span>
+    <span class="theme-ico-moon flex dark:hidden">${ICONS.moon}</span>
+  </button>`;
+}
 
 function currentPage() {
   const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
@@ -26,21 +36,21 @@ function logoHTML(size = 'md') {
   const txt = size === 'sm' ? 'text-[19px]' : 'text-[21px]';
   return `<a class="js-logo flex items-center gap-2.5 flex-shrink-0" href="index.html" aria-label="AutoMart.uz bosh sahifa">
     <span class="logo-mark ${box} bg-brand flex items-center justify-center text-white font-extrabold shadow-lift">A</span>
-    <span class="${txt} font-extrabold tracking-tight text-gray-900">AutoMart<span class="text-brand">.uz</span></span>
+    <span class="${txt} font-extrabold tracking-tight text-gray-900 dark:text-white">AutoMart<span class="text-brand">.uz</span></span>
   </a>`;
 }
 
 function headerHTML() {
   const page = currentPage();
   const catChips = CATEGORIES.map(
-    (c) => `<a href="katalog.html?cat=${c.id}" class="nav-link text-[13.5px] sm:text-sm font-medium text-gray-700 hover:text-brand whitespace-nowrap py-1 transition-colors">${c.name}</a>`
+    (c) => `<a href="katalog.html?cat=${c.id}" class="nav-link text-[13.5px] sm:text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-brand whitespace-nowrap py-1 transition-colors">${c.name}</a>`
   ).join('');
 
   const iconLink = (href, icon, label, badge) => {
     const active = page === href;
-    return `<a href="${href}" class="relative flex flex-col items-center gap-[3px] text-[11px] font-medium ${active ? 'text-brand' : 'text-gray-500 hover:text-brand'} transition-colors">
+    return `<a href="${href}" class="relative flex flex-col items-center gap-[3px] text-[11px] font-medium ${active ? 'text-brand' : 'text-gray-500 dark:text-gray-400 hover:text-brand'} transition-colors">
       ${icon}
-      ${badge ? `<span class="${badge} hidden absolute -top-1.5 right-1 min-w-[18px] h-[18px] px-1 bg-brand text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white">0</span>` : ''}
+      ${badge ? `<span class="${badge} hidden absolute -top-1.5 right-1 min-w-[18px] h-[18px] px-1 bg-brand text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white dark:ring-gray-900">0</span>` : ''}
       ${label}
     </a>`;
   };
@@ -58,16 +68,19 @@ function headerHTML() {
         <a href="index.html#bonus" class="text-white/75 hover:text-white whitespace-nowrap transition-colors">Bonus CLUB</a>
         <a href="#contact" class="text-white/75 hover:text-white whitespace-nowrap transition-colors">Ulgurji sotuvchilar</a>
       </nav>
-      <a class="flex items-center gap-1.5 whitespace-nowrap font-semibold bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors"
-         href="https://t.me/Mirkarim1" target="_blank" rel="noopener">
-        ${ICONS.telegram}
-        <span class="hidden xs:inline">Telegram</span>
-      </a>
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <a class="flex items-center gap-1.5 whitespace-nowrap font-semibold bg-white/10 hover:bg-white/20 px-3 py-1 rounded-full transition-colors"
+           href="https://t.me/Mirkarim1" target="_blank" rel="noopener">
+          ${ICONS.telegram}
+          <span class="hidden xs:inline">Telegram</span>
+        </a>
+        ${themeToggleHTML()}
+      </div>
     </div>
   </div>
 
   <!-- Main header -->
-  <header class="header-glass border-b border-gray-200/80 md:sticky md:top-0 z-40">
+  <header class="header-glass border-b border-transparent sticky top-0 z-40">
     <div class="max-w-[1240px] mx-auto px-4 sm:px-5 py-3 md:py-3.5 flex items-center gap-3 sm:gap-4 md:gap-5 flex-wrap">
       ${logoHTML()}
 
@@ -76,9 +89,9 @@ function headerHTML() {
         Kataloglar
       </a>
 
-      <form class="js-search-form order-3 basis-full md:basis-auto md:order-none flex-1 flex items-center bg-gray-100 border border-gray-200 focus-within:border-brand focus-within:bg-white focus-within:ring-4 focus-within:ring-brand/10 rounded-xl overflow-hidden min-w-0 transition">
-        <span class="pl-3.5 text-gray-400 flex-shrink-0">${ICONS.search}</span>
-        <input type="search" name="q" autocomplete="off" class="js-search-input flex-1 min-w-0 bg-transparent px-3 py-2.5 sm:py-3 text-sm outline-none placeholder:text-gray-400 text-gray-900" placeholder="Artikul, detal nomi yoki avtomobil modeli" />
+      <form class="js-search-form order-3 basis-full md:basis-auto md:order-none flex-1 flex items-center bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-800 focus-within:border-brand focus-within:bg-white dark:focus-within:bg-gray-800 focus-within:ring-4 focus-within:ring-brand/10 rounded-xl overflow-hidden min-w-0 transition">
+        <span class="pl-3.5 text-gray-400 dark:text-gray-500 flex-shrink-0">${ICONS.search}</span>
+        <input type="search" name="q" autocomplete="off" class="js-search-input flex-1 min-w-0 bg-transparent px-3 py-2.5 sm:py-3 text-sm outline-none placeholder:text-gray-400 dark:placeholder:text-gray-500 text-gray-900 dark:text-white" placeholder="Artikul, detal nomi yoki avtomobil modeli" />
         <button type="submit" class="bg-brand hover:bg-brand-dark text-white h-10 sm:h-11 px-4 rounded-r-[11px] flex items-center justify-center flex-shrink-0 text-sm font-semibold transition-colors" aria-label="Qidirish">
           <span class="hidden sm:inline">Qidirish</span>
           <span class="sm:hidden">${ICONS.search}</span>
@@ -93,16 +106,16 @@ function headerHTML() {
         ${iconLink('profil.html', ICONS.user, 'Profil')}
       </nav>
 
-      <button class="burger md:hidden ml-auto flex flex-col justify-center items-center gap-[5px] w-10 h-10 rounded-xl border border-gray-200 bg-white flex-shrink-0 active:scale-95 transition" aria-label="Menyu" aria-expanded="false">
-        <span class="w-[18px] h-0.5 bg-gray-900 rounded"></span>
-        <span class="w-[18px] h-0.5 bg-gray-900 rounded"></span>
-        <span class="w-[18px] h-0.5 bg-gray-900 rounded"></span>
+      <button class="burger md:hidden ml-auto flex flex-col justify-center items-center gap-[5px] w-10 h-10 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 flex-shrink-0 active:scale-95 transition" aria-label="Menyu" aria-expanded="false">
+        <span class="w-[18px] h-0.5 bg-gray-900 dark:bg-white rounded"></span>
+        <span class="w-[18px] h-0.5 bg-gray-900 dark:bg-white rounded"></span>
+        <span class="w-[18px] h-0.5 bg-gray-900 dark:bg-white rounded"></span>
       </button>
     </div>
   </header>
 
   <!-- Category strip -->
-  <nav class="border-b border-gray-200 bg-white">
+  <nav class="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
     <div class="max-w-[1240px] mx-auto px-4 sm:px-5 flex items-center gap-5 sm:gap-6 h-12 overflow-x-auto no-scrollbar scroll-row fade-x">
       <a href="katalog.html?filter=discount" class="flex items-center gap-1.5 text-[13.5px] sm:text-sm font-bold text-brand whitespace-nowrap">${ICONS.bolt} Chegirmalar</a>
       ${catChips}
@@ -112,25 +125,31 @@ function headerHTML() {
   <!-- Mobile drawer -->
   <div class="mmenu fixed inset-0 z-[70] md:hidden" aria-hidden="true">
     <div class="mmenu-overlay absolute inset-0 bg-gray-950/55"></div>
-    <div class="mmenu-panel absolute top-0 right-0 h-full w-[86%] max-w-[360px] bg-white shadow-2xl flex flex-col" role="dialog" aria-label="Menyu">
-      <div class="flex items-center justify-between px-5 h-16 border-b border-gray-100">
+    <div class="mmenu-panel absolute top-0 right-0 h-full w-[86%] max-w-[360px] bg-white dark:bg-gray-900 shadow-2xl flex flex-col" role="dialog" aria-label="Menyu">
+      <div class="flex items-center justify-between px-5 h-16 border-b border-gray-100 dark:border-gray-800 dark:border-gray-800">
         ${logoHTML('sm')}
-        <button class="mmenu-close w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-700" aria-label="Yopish">${ICONS.close}</button>
+        <div class="flex items-center gap-2">
+          <button type="button" class="js-theme-toggle press-fx relative w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 transition-colors" aria-label="Rejimni almashtirish" aria-pressed="false">
+            <span class="theme-ico-sun hidden dark:flex">${ICONS.sun}</span>
+            <span class="theme-ico-moon flex dark:hidden">${ICONS.moon}</span>
+          </button>
+          <button class="mmenu-close w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300" aria-label="Yopish">${ICONS.close}</button>
+        </div>
       </div>
       <div class="flex-1 overflow-y-auto overflow-x-hidden px-3 py-4">
         <div class="grid grid-cols-2 gap-2 mb-5 px-2">
-          <a href="garaj.html" class="flex items-center gap-1.5 min-w-0 rounded-xl bg-gray-50 border border-gray-200 px-2.5 py-3 text-[12.5px] font-semibold text-gray-800 hover:border-brand hover:text-brand transition-colors"><span class="text-brand flex-shrink-0">${ICONS.garage}</span><span class="truncate">Garaj</span></a>
-          <a href="buyurtmalar.html" class="flex items-center gap-1.5 min-w-0 rounded-xl bg-gray-50 border border-gray-200 px-2.5 py-3 text-[12.5px] font-semibold text-gray-800 hover:border-brand hover:text-brand transition-colors"><span class="text-brand flex-shrink-0">${ICONS.box}</span><span class="truncate">Buyurtmalar</span></a>
+          <a href="garaj.html" class="flex items-center gap-1.5 min-w-0 rounded-xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-800 px-2.5 py-3 text-[12.5px] font-semibold text-gray-800 dark:text-gray-100 hover:border-brand hover:text-brand transition-colors"><span class="text-brand flex-shrink-0">${ICONS.garage}</span><span class="truncate">Garaj</span></a>
+          <a href="buyurtmalar.html" class="flex items-center gap-1.5 min-w-0 rounded-xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-800 px-2.5 py-3 text-[12.5px] font-semibold text-gray-800 dark:text-gray-100 hover:border-brand hover:text-brand transition-colors"><span class="text-brand flex-shrink-0">${ICONS.box}</span><span class="truncate">Buyurtmalar</span></a>
         </div>
-        <div class="px-2 text-[11px] uppercase tracking-wider font-bold text-gray-400 mb-2">Toifalar</div>
-        <a href="katalog.html?filter=discount" class="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-brand hover:bg-brand-light transition-colors"><span class="flex items-center gap-2">${ICONS.bolt} Chegirmalar</span>${ICONS.chevron}</a>
-        ${CATEGORIES.map((c) => `<a href="katalog.html?cat=${c.id}" class="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium text-gray-800 hover:bg-gray-50 transition-colors"><span class="flex items-center gap-3"><img src="${c.img}" alt="" class="w-8 h-8 rounded-lg object-cover img-frame" loading="lazy" />${c.name}</span><span class="text-gray-300">${ICONS.chevron}</span></a>`).join('')}
-        <div class="px-2 mt-5 text-[11px] uppercase tracking-wider font-bold text-gray-400 mb-2">Ma'lumot</div>
-        <a href="index.html#bonus" class="block px-3 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-gray-50">Bonus CLUB</a>
-        <a href="#contact" class="block px-3 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-gray-50">Ulgurji sotuvchilar</a>
-        <a href="info.html?topic=delivery" class="block px-3 py-2.5 rounded-xl text-sm text-gray-700 hover:bg-gray-50">Yetkazib berish</a>
+        <div class="px-2 text-[11px] uppercase tracking-wider font-bold text-gray-400 dark:text-gray-500 mb-2">Toifalar</div>
+        <a href="katalog.html?filter=discount" class="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-brand hover:bg-brand-light dark:hover:bg-brand/10 transition-colors"><span class="flex items-center gap-2">${ICONS.bolt} Chegirmalar</span>${ICONS.chevron}</a>
+        ${CATEGORIES.map((c) => `<a href="katalog.html?cat=${c.id}" class="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium text-gray-800 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"><span class="flex items-center gap-3"><img src="${c.img}" alt="" class="w-8 h-8 rounded-lg object-cover img-frame" loading="lazy" />${c.name}</span><span class="text-gray-300 dark:text-gray-600">${ICONS.chevron}</span></a>`).join('')}
+        <div class="px-2 mt-5 text-[11px] uppercase tracking-wider font-bold text-gray-400 dark:text-gray-500 mb-2">Ma'lumot</div>
+        <a href="index.html#bonus" class="block px-3 py-2.5 rounded-xl text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Bonus CLUB</a>
+        <a href="#contact" class="block px-3 py-2.5 rounded-xl text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Ulgurji sotuvchilar</a>
+        <a href="info.html?topic=delivery" class="block px-3 py-2.5 rounded-xl text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800">Yetkazib berish</a>
       </div>
-      <div class="p-4 border-t border-gray-100">
+      <div class="p-4 border-t border-gray-100 dark:border-gray-800">
         <a href="https://t.me/Mirkarim1" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full bg-[#29a9eb] hover:bg-[#1f95d3] text-white font-bold py-3 rounded-xl transition-colors">${ICONS.telegram} Telegram orqali yozish</a>
       </div>
     </div>
@@ -141,15 +160,15 @@ function bottomNavHTML() {
   const page = currentPage();
   const item = (href, icon, label, badge) => {
     const active = page === href;
-    return `<a href="${href}" class="bnav-item ${active ? 'active' : ''} relative flex-1 flex flex-col items-center justify-center gap-0.5 text-[10.5px] font-semibold text-gray-500 py-1.5 transition-colors">
+    return `<a href="${href}" class="bnav-item ${active ? 'active' : ''} relative flex-1 flex flex-col items-center justify-center gap-0.5 text-[10.5px] font-semibold text-gray-500 dark:text-gray-400 py-1.5 transition-colors">
       <span class="bnav-ico relative w-12 h-7 rounded-full flex items-center justify-center transition-colors">
         ${icon}
-        ${badge ? `<span class="${badge} hidden absolute -top-1 right-1.5 min-w-[17px] h-[17px] px-1 bg-brand text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white">0</span>` : ''}
+        ${badge ? `<span class="${badge} hidden absolute -top-1 right-1.5 min-w-[17px] h-[17px] px-1 bg-brand text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white dark:ring-gray-900">0</span>` : ''}
       </span>
       ${label}
     </a>`;
   };
-  return `<nav class="bottom-nav md:hidden fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-t border-gray-200 shadow-top" style="padding-bottom:env(safe-area-inset-bottom,0px)" aria-label="Asosiy navigatsiya">
+  return `<nav class="bottom-nav md:hidden fixed bottom-0 inset-x-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-t border-gray-200 dark:border-gray-800 shadow-top" style="padding-bottom:env(safe-area-inset-bottom,0px)" aria-label="Asosiy navigatsiya">
     <div class="flex items-stretch h-[62px] px-1">
       ${item('index.html', ICONS.home, 'Bosh sahifa')}
       ${item('katalog.html', ICONS.grid, 'Katalog')}
@@ -163,18 +182,18 @@ function bottomNavHTML() {
 function footerHTML() {
   const link = (href, text) => `<a href="${href}" class="hover:text-brand transition-colors">${text}</a>`;
   return `
-  <div class="bg-gray-50 border-t border-gray-200 mt-6">
+  <div class="bg-gray-50 dark:bg-gray-800/60 border-t border-gray-200 dark:border-gray-800 mt-6">
     <div class="max-w-[1240px] mx-auto px-4 sm:px-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr] gap-8 lg:gap-6 pb-10 pt-12">
       <div class="sm:col-span-2 lg:col-span-1">
         <div class="mb-3">${logoHTML()}</div>
-        <p class="text-[13.5px] text-gray-500 mb-5 leading-relaxed max-w-[360px]">Avtomobil ehtiyot qismlari va moylar bo'yicha ishonchli onlayn do'kon. Original mahsulotlar, qulay narx va tez yetkazib berish.</p>
+        <p class="text-[13.5px] text-gray-500 dark:text-gray-400 mb-5 leading-relaxed max-w-[360px]">Avtomobil ehtiyot qismlari va moylar bo'yicha ishonchli onlayn do'kon. Original mahsulotlar, qulay narx va tez yetkazib berish.</p>
         <div class="flex gap-2.5">
           <a href="https://t.me/Mirkarim1" target="_blank" rel="noopener" aria-label="Telegram"
-             class="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-brand hover:text-white hover:border-brand transition-colors">${ICONS.telegram}</a>
-          <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-brand hover:text-white hover:border-brand transition-colors">
+             class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand hover:text-white hover:border-brand transition-colors">${ICONS.telegram}</a>
+          <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand hover:text-white hover:border-brand transition-colors">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
           </a>
-          <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-brand hover:text-white hover:border-brand transition-colors">
+          <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand hover:text-white hover:border-brand transition-colors">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 8h2V4h-2a4 4 0 0 0-4 4v3H9v4h2v7h4v-7h2.5l.5-4H15V8Z"/></svg>
           </a>
         </div>
@@ -182,7 +201,7 @@ function footerHTML() {
 
       <div>
         <h4 class="text-[15px] font-bold mb-4">AutoMart.uz</h4>
-        <div class="flex flex-col gap-2.5 text-[13.5px] text-gray-500">
+        <div class="flex flex-col gap-2.5 text-[13.5px] text-gray-500 dark:text-gray-400">
           ${link('info.html?topic=about', 'Kompaniya haqida')}
           ${link('#contact', 'Kontaktlar')}
           ${link('info.html?topic=jurnal', 'Jurnal')}
@@ -192,7 +211,7 @@ function footerHTML() {
 
       <div>
         <h4 class="text-[15px] font-bold mb-4">Yordam</h4>
-        <div class="flex flex-col gap-2.5 text-[13.5px] text-gray-500">
+        <div class="flex flex-col gap-2.5 text-[13.5px] text-gray-500 dark:text-gray-400">
           ${link('info.html?topic=delivery', 'Yetkazib berish shartlari')}
           ${link('info.html?topic=returns', 'Almashtirish va qaytarish')}
           ${link('info.html?topic=payment', "To'lov usullari")}
@@ -201,7 +220,7 @@ function footerHTML() {
 
       <div id="contact" class="scroll-mt-24">
         <h4 class="text-[15px] font-bold mb-4">Biz bilan bog'lanish</h4>
-        <ul class="flex flex-col gap-3 text-[13.5px] text-gray-500">
+        <ul class="flex flex-col gap-3 text-[13.5px] text-gray-500 dark:text-gray-400">
           <li class="flex gap-2.5 items-start">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="text-brand flex-shrink-0 mt-0.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
             <a href="mailto:info@automart.uz" class="hover:text-brand">info@automart.uz</a>
@@ -218,8 +237,8 @@ function footerHTML() {
       </div>
     </div>
 
-    <div class="border-t border-gray-200">
-      <div class="max-w-[1240px] mx-auto px-4 sm:px-5 py-4 flex items-center justify-between flex-wrap gap-2.5 text-[12.5px] text-gray-500">
+    <div class="border-t border-gray-200 dark:border-gray-800">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-5 py-4 flex items-center justify-between flex-wrap gap-2.5 text-[12.5px] text-gray-500 dark:text-gray-400">
         <span>© 2026 AutoMart.uz — Barcha huquqlar himoyalangan</span>
         <div class="flex gap-4 flex-wrap">
           ${link('info.html?topic=terms', 'Foydalanish shartlari')}
@@ -240,9 +259,24 @@ function fabTelegramHTML() {
 function mountLayout() {
   const headerEl = document.getElementById('app-header');
   const footerEl = document.getElementById('app-footer');
-  if (headerEl) headerEl.innerHTML = headerHTML();
+  if (headerEl) {
+    // headerHTML() contains a position:sticky <header>. A sticky element can never stick
+    // past the bottom edge of its own parent box, and #app-header is only ~165px tall on
+    // its own — so nesting the sticky header inside it breaks stickiness once the page
+    // scrolls past that point. Unwrap it: inject as direct siblings of #app-header (i.e.
+    // direct children of <body>, whose box spans the full page) instead of inside it.
+    headerEl.insertAdjacentHTML('afterend', headerHTML());
+    headerEl.remove();
+  }
   if (footerEl) footerEl.innerHTML = footerHTML();
   document.body.insertAdjacentHTML('beforeend', bottomNavHTML() + fabTelegramHTML());
+
+  const glassHeader = document.querySelector('.header-glass');
+  if (glassHeader) {
+    const paintScroll = () => glassHeader.classList.toggle('is-scrolled', window.scrollY > 6);
+    paintScroll();
+    window.addEventListener('scroll', paintScroll, { passive: true });
+  }
 
   const burger = document.querySelector('.burger');
   const menu = document.querySelector('.mmenu');
@@ -275,6 +309,14 @@ function mountLayout() {
 
   document.querySelectorAll('.js-logo').forEach((a) => a.addEventListener('click', () => sessionStorage.removeItem('automart_gate_seen')));
 
+  document.querySelectorAll('.js-theme-toggle').forEach((btn) => {
+    btn.setAttribute('aria-pressed', String(document.documentElement.classList.contains('dark')));
+    btn.addEventListener('click', () => {
+      toggleTheme();
+      btn.classList.remove('animate-pop'); void btn.offsetWidth; btn.classList.add('animate-pop');
+    });
+  });
+
   document.querySelectorAll('main h2').forEach((h) => { if (!h.hasAttribute('data-reveal')) h.setAttribute('data-reveal', 'title'); });
 
   updateCartBadge();
@@ -287,7 +329,7 @@ document.addEventListener('DOMContentLoaded', mountLayout);
 // ---- Live search suggestions ----
 function initSearchSuggest(form, input) {
   const box = document.createElement('div');
-  box.className = 'search-suggest absolute left-0 right-0 top-full mt-2 bg-white border border-gray-200 rounded-2xl shadow-card overflow-hidden z-50 hidden';
+  box.className = 'search-suggest absolute left-0 right-0 top-full mt-2 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-card overflow-hidden z-50 hidden';
   form.classList.add('relative');
   form.classList.remove('overflow-hidden');
   form.appendChild(box);
@@ -300,7 +342,7 @@ function initSearchSuggest(form, input) {
     const tokens = normText(q).split(' ').filter(Boolean).sort((a, b) => b.length - a.length);
     if (!tokens.length) return esc(text);
     const re = new RegExp('(' + tokens.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|') + ')', 'ig');
-    return esc(text).replace(re, '<mark class="bg-yellow-200 text-gray-900 rounded px-0.5">$1</mark>');
+    return esc(text).replace(re, '<mark class="bg-yellow-200 text-gray-900 dark:text-white rounded px-0.5">$1</mark>');
   };
 
   const render = () => {
@@ -309,18 +351,18 @@ function initSearchSuggest(form, input) {
     items = searchProducts(q).slice(0, 6);
     const total = searchProducts(q).length;
     if (!items.length) {
-      box.innerHTML = `<div class="px-4 py-3 text-sm text-gray-500">"${q}" bo'yicha hech narsa topilmadi</div>`;
+      box.innerHTML = `<div class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">"${q}" bo'yicha hech narsa topilmadi</div>`;
     } else {
       box.innerHTML = items.map((p, i) => `
-        <a href="mahsulot.html?id=${p.id}" data-i="${i}" class="suggest-item flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 transition-colors">
+        <a href="mahsulot.html?id=${p.id}" data-i="${i}" class="suggest-item flex items-center gap-3 px-3 py-2.5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
           <img src="${p.img}" alt="" class="w-11 h-11 rounded-lg object-cover img-frame flex-shrink-0" loading="lazy" />
           <span class="flex-1 min-w-0">
-            <span class="block text-[13.5px] font-medium text-gray-900 truncate">${highlight(p.name, q)}</span>
-            <span class="block text-[12px] text-gray-500">${CATEGORIES.find((c) => c.id === p.category)?.name || ''}</span>
+            <span class="block text-[13.5px] font-medium text-gray-900 dark:text-white truncate">${highlight(p.name, q)}</span>
+            <span class="block text-[12px] text-gray-500 dark:text-gray-400">${CATEGORIES.find((c) => c.id === p.category)?.name || ''}</span>
           </span>
-          <span class="text-[13.5px] font-bold text-gray-900 tabular whitespace-nowrap">${money(p.price)}</span>
+          <span class="text-[13.5px] font-bold text-gray-900 dark:text-white tabular whitespace-nowrap">${money(p.price)}</span>
         </a>`).join('') +
-        `<a href="katalog.html?q=${encodeURIComponent(q)}" class="suggest-all flex items-center justify-between px-4 py-3 text-sm font-semibold text-brand bg-brand-soft hover:bg-brand-light transition-colors">Barcha natijalar (${total}) <span>→</span></a>`;
+        `<a href="katalog.html?q=${encodeURIComponent(q)}" class="suggest-all flex items-center justify-between px-4 py-3 text-sm font-semibold text-brand bg-brand-soft dark:bg-brand/10 hover:bg-brand-light dark:hover:bg-brand/10 transition-colors">Barcha natijalar (${total}) <span>→</span></a>`;
     }
     box.classList.remove('hidden');
     cursor = -1;
@@ -335,7 +377,7 @@ function initSearchSuggest(form, input) {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
       cursor = (cursor + (e.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
-      links.forEach((l, i) => l.classList.toggle('bg-gray-100', i === cursor));
+      links.forEach((l, i) => { l.classList.toggle('bg-gray-100', i === cursor); l.classList.toggle('dark:bg-gray-800', i === cursor); });
     } else if (e.key === 'Enter' && cursor >= 0) {
       e.preventDefault();
       window.location.href = links[cursor].href;
@@ -403,30 +445,30 @@ function showToast(text, img, variant) {
 // ---- Product / category cards ----
 
 function categoryCardHTML(cat) {
-  return `<a href="katalog.html?cat=${cat.id}" data-reveal class="press-fx group bg-gray-50 border border-gray-200/80 hover:border-brand/40 hover:bg-white hover:shadow-card hover:-translate-y-[3px] transition rounded-2xl p-3 sm:p-4 flex items-center gap-3 overflow-hidden">
+  return `<a href="katalog.html?cat=${cat.id}" data-reveal class="press-fx group bg-gray-50 dark:bg-gray-800/60 border border-gray-200/80 dark:border-gray-800/80 hover:border-brand/40 hover:bg-white dark:hover:bg-gray-800 hover:shadow-card hover:-translate-y-[3px] transition rounded-2xl p-3 sm:p-4 flex items-center gap-3 overflow-hidden">
     <img src="${cat.img}" class="cat-hover-img w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-xl flex-shrink-0 img-frame" alt="${cat.name}" loading="lazy" />
-    <span class="font-bold text-[13.5px] sm:text-[14.5px] leading-tight text-gray-900 group-hover:text-brand transition-colors">${cat.name}</span>
+    <span class="font-bold text-[13.5px] sm:text-[14.5px] leading-tight text-gray-900 dark:text-white group-hover:text-brand transition-colors">${cat.name}</span>
   </a>`;
 }
 
 function productCardHTML(p) {
   const fav = isFavorite(p.id);
-  return `<div class="group relative bg-white border border-gray-200 rounded-2xl p-2.5 sm:p-3.5 hover:shadow-lift hover:border-brand hover:ring-1 hover:ring-brand hover:-translate-y-[3px] transition overflow-hidden flex flex-col" data-reveal data-product-id="${p.id}">
-    <span class="absolute top-4 left-4 sm:top-6 sm:left-6 bg-yellow-400 text-gray-900 text-[11px] sm:text-xs font-extrabold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg z-10 shadow-sm">-${p.discount}%</span>
-    <button class="fav-btn press-fx absolute top-4 right-4 sm:top-6 sm:right-6 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 shadow-md flex items-center justify-center z-10 ${fav ? 'text-brand' : 'text-gray-400 hover:text-brand'}" aria-label="Sevimlilarga qo'shish" aria-pressed="${fav}">
+  return `<div class="group relative bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-2.5 sm:p-3.5 hover:shadow-lift hover:border-brand hover:ring-1 hover:ring-brand hover:-translate-y-[3px] transition overflow-hidden flex flex-col" data-reveal data-product-id="${p.id}">
+    <span class="absolute top-4 left-4 sm:top-6 sm:left-6 bg-yellow-400 text-gray-900 dark:text-white text-[11px] sm:text-xs font-extrabold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg z-10 shadow-sm">-${p.discount}%</span>
+    <button class="fav-btn press-fx absolute top-4 right-4 sm:top-6 sm:right-6 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/95 dark:bg-gray-900/95 shadow-md flex items-center justify-center z-10 ${fav ? 'text-brand' : 'text-gray-400 dark:text-gray-500 hover:text-brand'}" aria-label="Sevimlilarga qo'shish" aria-pressed="${fav}">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="${fav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M12 20.5S3.5 15 3.5 8.9A4.4 4.4 0 0 1 12 6.6a4.4 4.4 0 0 1 8.5 2.3C20.5 15 12 20.5 12 20.5Z"/></svg>
     </button>
     <a href="mahsulot.html?id=${p.id}" class="block overflow-hidden rounded-xl mb-2.5 sm:mb-3 img-frame">
       <img src="${p.img}" alt="${p.name}" class="w-full aspect-square object-cover" loading="lazy" decoding="async" />
     </a>
     <a href="mahsulot.html?id=${p.id}" class="block mb-2">
-      <div class="text-[13px] sm:text-sm font-semibold leading-snug line-clamp-2 min-h-[36px] sm:min-h-[40px] text-gray-900 group-hover:text-brand transition-colors">${p.name}</div>
+      <div class="text-[13px] sm:text-sm font-semibold leading-snug line-clamp-2 min-h-[36px] sm:min-h-[40px] text-gray-900 dark:text-white group-hover:text-brand transition-colors">${p.name}</div>
     </a>
     <div class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 mb-1 tabular">
-      <span class="text-[15px] sm:text-[17px] font-extrabold text-gray-900">${money(p.price)}</span>
-      <span class="text-[12px] sm:text-[13px] text-gray-400 line-through">${money(p.oldPrice)}</span>
+      <span class="text-[15px] sm:text-[17px] font-extrabold text-gray-900 dark:text-white">${money(p.price)}</span>
+      <span class="text-[12px] sm:text-[13px] text-gray-400 dark:text-gray-500 line-through">${money(p.oldPrice)}</span>
     </div>
-    <div class="inline-flex self-start items-center gap-1 text-[11px] sm:text-xs font-medium text-gray-600 bg-gray-100 px-2 py-0.5 rounded-md mb-3 tabular">${money(Math.round(p.price / 12))} × 12 oy</div>
+    <div class="inline-flex self-start items-center gap-1 text-[11px] sm:text-xs font-medium text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-md mb-3 tabular">${money(Math.round(p.price / 12))} × 12 oy</div>
     <button class="add-cart-btn ripple-host press-fx mt-auto w-full bg-brand hover:bg-brand-dark text-white font-bold text-[13px] sm:text-sm py-2.5 rounded-xl flex items-center justify-center gap-2 transition-colors">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/><path d="M2.5 3h2.4l2.1 11.3a2 2 0 0 0 2 1.7h8.2a2 2 0 0 0 2-1.6L21 7.5H6.2"/></svg>
       Savatga
@@ -443,6 +485,7 @@ function attachCardEvents(container) {
       const active = toggleFavorite(id);
       btn.classList.toggle('text-brand', active);
       btn.classList.toggle('text-gray-400', !active);
+      btn.classList.toggle('dark:text-gray-500', !active);
       btn.classList.toggle('hover:text-brand', !active);
       btn.setAttribute('aria-pressed', String(active));
       const svg = btn.querySelector('svg');
@@ -453,7 +496,10 @@ function attachCardEvents(container) {
       showToast(active ? "Sevimlilarga qo'shildi" : "Sevimlilardan olib tashlandi");
       if (container.dataset.syncFavPage === 'true' && !active) {
         card.remove();
-        if (!container.querySelector('[data-product-id]')) {
+        const remaining = container.querySelectorAll('[data-product-id]').length;
+        const countEl = document.getElementById('fav-count');
+        if (countEl) countEl.textContent = remaining ? `${remaining} ta mahsulot` : '';
+        if (!remaining) {
           renderProductGrid(container, [], "Sevimlilar ro'yxati bo'sh.");
         }
       }
@@ -481,7 +527,7 @@ function attachCardEvents(container) {
 
 function emptyStateHTML(msg, cta) {
   return `<div class="col-span-full text-center py-14 sm:py-20 px-4">
-    <p class="text-gray-500 text-[15px] max-w-[380px] mx-auto text-balance">${msg}</p>
+    <p class="text-gray-500 dark:text-gray-400 text-[15px] max-w-[380px] mx-auto text-balance">${msg}</p>
     ${cta ? `<a href="${cta.href}" class="inline-flex mt-5 bg-brand hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl transition-colors">${cta.text}</a>` : ''}
   </div>`;
 }

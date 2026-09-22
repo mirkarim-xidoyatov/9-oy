@@ -1,5 +1,6 @@
-// AutoMart.uz — shared Tailwind (CDN) theme
+// AutoMart.uz — shared Tailwind (CDN) theme + dark mode
 tailwind.config = {
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -15,3 +16,25 @@ tailwind.config = {
     },
   },
 };
+
+// Apply the saved/preferred color scheme before first paint to avoid a flash.
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('automart_theme'); } catch (e) {}
+  var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.classList.toggle('dark', dark);
+})();
+
+function setTheme(dark) {
+  document.documentElement.classList.toggle('dark', dark);
+  try { localStorage.setItem('automart_theme', dark ? 'dark' : 'light'); } catch (e) {}
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', dark ? '#0b1120' : '#2563eb');
+  document.querySelectorAll('.js-theme-toggle').forEach(function (btn) {
+    btn.setAttribute('aria-pressed', String(dark));
+  });
+}
+
+function toggleTheme() {
+  setTheme(!document.documentElement.classList.contains('dark'));
+}

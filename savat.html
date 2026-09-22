@@ -13,7 +13,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="theme.js"></script>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
 
 <div id="app-header"></div>
 
@@ -28,23 +28,23 @@
 
     <div id="cart-content" hidden class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px] gap-6 lg:gap-8 items-start">
       <div id="cart-items" class="flex flex-col gap-3 sm:gap-4"></div>
-      <aside class="bg-gray-50 border border-gray-200 rounded-2xl p-5 sm:p-6 lg:sticky lg:top-[92px]">
+      <aside data-reveal="right" class="bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-6 lg:sticky lg:top-[92px]">
         <h3 class="font-bold text-lg mb-4">Buyurtma xulosasi</h3>
-        <div class="flex justify-between text-sm text-gray-600 mb-2 tabular">
+        <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2 tabular">
           <span>Mahsulotlar (<span id="sum-count">0</span>)</span>
           <span id="sum-subtotal">0 so'm</span>
         </div>
-        <div class="flex justify-between text-sm text-gray-600 mb-2">
+        <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
           <span>Yetkazib berish</span><span class="text-emerald-600 font-semibold">Bepul</span>
         </div>
-        <div class="flex justify-between text-sm text-gray-600 mb-4 tabular">
+        <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-4 tabular">
           <span>CLUB bonus (3%)</span><span id="sum-bonus" class="text-brand font-semibold">+0</span>
         </div>
-        <div class="flex justify-between font-extrabold text-lg border-t border-gray-200 pt-4 mb-5 tabular">
+        <div class="flex justify-between font-extrabold text-lg border-t border-gray-200 dark:border-gray-800 pt-4 mb-5 tabular">
           <span>Jami</span><span id="sum-total">0 so'm</span>
         </div>
         <button id="checkout-btn" class="btn-shine press-fx w-full h-12 bg-brand hover:bg-brand-dark text-white font-bold rounded-xl transition-colors shadow-lift">Buyurtma berish</button>
-        <p class="text-[12px] text-gray-400 text-center mt-3">Buyurtma bergach menejer siz bilan bog'lanadi</p>
+        <p class="text-[12px] text-gray-400 dark:text-gray-500 text-center mt-3">Buyurtma bergach menejer siz bilan bog'lanadi</p>
       </aside>
     </div>
 
@@ -53,10 +53,10 @@
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12.5 4.5 4.5L19 7"/></svg>
       </div>
       <h2 class="text-xl sm:text-2xl font-extrabold mb-2">Buyurtmangiz qabul qilindi!</h2>
-      <p class="text-gray-500 mb-6">Buyurtma raqami: <span id="order-id" class="font-bold text-gray-900 tabular"></span></p>
+      <p class="text-gray-500 dark:text-gray-400 mb-6">Buyurtma raqami: <span id="order-id" class="font-bold text-gray-900 dark:text-white tabular"></span></p>
       <div class="flex gap-3 justify-center flex-wrap">
         <a href="buyurtmalar.html" class="bg-brand hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl transition-colors">Buyurtmalarim</a>
-        <a href="katalog.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-5 py-2.5 rounded-xl transition-colors">Xaridni davom ettirish</a>
+        <a href="katalog.html" class="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold px-5 py-2.5 rounded-xl transition-colors">Xaridni davom ettirish</a>
       </div>
     </div>
   </section>
@@ -69,22 +69,22 @@
 <script>
   function cartRowHTML(item) {
     const p = item.product;
-    return `<div class="grid grid-cols-[72px_1fr] sm:grid-cols-[88px_1fr_auto] gap-x-3.5 sm:gap-x-5 gap-y-3 border border-gray-200 rounded-2xl p-3.5 sm:p-4 items-center" data-id="${p.id}">
+    return `<div data-reveal class="grid grid-cols-[72px_1fr] sm:grid-cols-[88px_1fr_auto] gap-x-3.5 sm:gap-x-5 gap-y-3 border border-gray-200 dark:border-gray-800 rounded-2xl p-3.5 sm:p-4 items-center" data-id="${p.id}">
       <a href="mahsulot.html?id=${p.id}" class="block rounded-xl overflow-hidden img-frame">
         <img src="${p.img}" class="w-full aspect-square object-cover" alt="${p.name}" loading="lazy">
       </a>
       <div class="min-w-0">
         <a href="mahsulot.html?id=${p.id}" class="font-semibold text-[13.5px] sm:text-sm leading-snug hover:text-brand line-clamp-2">${p.name}</a>
-        <div class="text-gray-500 text-[12.5px] mt-1 tabular">${money(p.price)} / dona</div>
+        <div class="text-gray-500 dark:text-gray-400 text-[12.5px] mt-1 tabular">${money(p.price)} / dona</div>
       </div>
       <div class="col-span-2 sm:col-span-1 flex items-center justify-between sm:justify-end gap-3 sm:gap-5 min-w-0">
-        <div class="flex items-center border border-gray-200 rounded-lg h-9 flex-shrink-0">
-          <button class="qty-minus w-9 h-full flex items-center justify-center text-lg text-gray-600 hover:text-brand hover:bg-gray-50 rounded-l-lg transition-colors" aria-label="Kamaytirish">−</button>
+        <div class="flex items-center border border-gray-200 dark:border-gray-800 rounded-lg h-9 flex-shrink-0">
+          <button class="qty-minus w-9 h-full flex items-center justify-center text-lg text-gray-600 dark:text-gray-400 hover:text-brand hover:bg-gray-50 dark:hover:bg-gray-800 rounded-l-lg transition-colors" aria-label="Kamaytirish">−</button>
           <span class="qty-val w-8 text-center text-sm font-bold tabular">${item.qty}</span>
-          <button class="qty-plus w-9 h-full flex items-center justify-center text-lg text-gray-600 hover:text-brand hover:bg-gray-50 rounded-r-lg transition-colors" aria-label="Ko'paytirish">+</button>
+          <button class="qty-plus w-9 h-full flex items-center justify-center text-lg text-gray-600 dark:text-gray-400 hover:text-brand hover:bg-gray-50 dark:hover:bg-gray-800 rounded-r-lg transition-colors" aria-label="Ko'paytirish">+</button>
         </div>
-        <div class="font-extrabold text-[15px] sm:text-base text-gray-900 sm:w-32 sm:text-right tabular whitespace-nowrap">${money(p.price * item.qty)}</div>
-        <button class="remove-btn text-gray-400 hover:text-red-500 hover:bg-red-50 w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors" aria-label="O'chirish">
+        <div class="font-extrabold text-[15px] sm:text-base text-gray-900 dark:text-white sm:w-32 sm:text-right tabular whitespace-nowrap">${money(p.price * item.qty)}</div>
+        <button class="remove-btn text-gray-400 dark:text-gray-500 hover:text-red-500 hover:bg-red-50 w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors" aria-label="O'chirish">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m2 0-1 13a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1L6 7"/></svg>
         </button>
       </div>
@@ -102,6 +102,7 @@
     }
 
     document.getElementById('cart-items').innerHTML = items.map(cartRowHTML).join('');
+    initScrollReveal();
     const total = cartTotal();
     document.getElementById('sum-count').textContent = items.reduce((s, i) => s + i.qty, 0);
     document.getElementById('sum-subtotal').textContent = money(total);

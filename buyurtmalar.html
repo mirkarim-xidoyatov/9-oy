@@ -13,14 +13,14 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="theme.js"></script>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
 
 <div id="app-header"></div>
 
 <main>
   <section class="max-w-[1240px] mx-auto px-4 sm:px-5 py-6 sm:py-8">
     <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1">Buyurtmalarim</h1>
-    <p id="orders-count" class="text-sm text-gray-500 mb-6"></p>
+    <p id="orders-count" class="text-sm text-gray-500 dark:text-gray-400 mb-6"></p>
     <div id="orders-empty" hidden></div>
     <div id="orders-list" class="flex flex-col gap-3 sm:gap-4 max-w-3xl"></div>
   </section>
@@ -38,24 +38,24 @@
       return `<div class="flex items-center gap-3 py-2">
         ${p ? `<img src="${p.img}" alt="" class="w-11 h-11 rounded-lg object-cover img-frame flex-shrink-0" loading="lazy" />` : ''}
         <div class="flex-1 min-w-0">
-          <div class="text-[13.5px] font-medium text-gray-800 line-clamp-1">${i.name}</div>
-          <div class="text-xs text-gray-500 tabular">${money(i.price)} × ${i.qty}</div>
+          <div class="text-[13.5px] font-medium text-gray-800 dark:text-gray-100 line-clamp-1">${i.name}</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400 tabular">${money(i.price)} × ${i.qty}</div>
         </div>
         <div class="text-sm font-semibold tabular whitespace-nowrap">${money(i.price * i.qty)}</div>
       </div>`;
     }).join('');
-    return `<div class="border border-gray-200 rounded-2xl p-4 sm:p-5 hover:shadow-card transition">
+    return `<div data-reveal class="border border-gray-200 dark:border-gray-800 rounded-2xl p-4 sm:p-5 hover:shadow-card transition">
       <div class="flex items-center justify-between gap-3 mb-3 flex-wrap">
         <div>
           <div class="font-bold tabular">Buyurtma № ${o.id}</div>
-          <div class="text-xs text-gray-500 mt-0.5 tabular">${date}</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 tabular">${date}</div>
         </div>
         <span class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full">
           <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Qayta ishlanmoqda
         </span>
       </div>
-      <div class="border-t border-gray-100 divide-y divide-gray-100">${items}</div>
-      <div class="flex justify-between items-center font-extrabold border-t border-gray-100 mt-1 pt-3 tabular">
+      <div class="border-t border-gray-100 dark:border-gray-800 divide-y divide-gray-100 dark:divide-gray-800">${items}</div>
+      <div class="flex justify-between items-center font-extrabold border-t border-gray-100 dark:border-gray-800 mt-1 pt-3 tabular">
         <span>Jami</span><span class="text-lg">${money(o.total)}</span>
       </div>
     </div>`;
@@ -68,6 +68,7 @@
     if (!orders.length) empty.innerHTML = emptyStateHTML("Hali buyurtmalar yo'q. Birinchi buyurtmangizni bering — biz tez yetkazamiz.", { href: 'katalog.html', text: 'Xarid qilishni boshlash' });
     document.getElementById('orders-count').textContent = orders.length ? `${orders.length} ta buyurtma` : '';
     document.getElementById('orders-list').innerHTML = orders.map(orderCardHTML).join('');
+    initScrollReveal();
   });
 </script>
 </body>

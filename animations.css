@@ -73,6 +73,11 @@ a:hover > .cat-hover-img { transform: scale(1.08) rotate(-2deg); }
     radial-gradient(1200px 600px at 50% -10%, #eaf1ff 0%, transparent 60%),
     linear-gradient(180deg, #fbfcff 0%, #f3f6fc 100%);
 }
+.dark .gate-bg {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(37,99,235,.18) 0%, transparent 60%),
+    linear-gradient(180deg, #0b1120 0%, #0a0e1a 100%);
+}
 .gate-grid {
   background-image:
     linear-gradient(rgba(37,99,235,.06) 1px, transparent 1px),
@@ -80,6 +85,11 @@ a:hover > .cat-hover-img { transform: scale(1.08) rotate(-2deg); }
   background-size: 34px 34px;
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 30%, transparent 100%);
           mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 30%, transparent 100%);
+}
+.dark .gate-grid {
+  background-image:
+    linear-gradient(rgba(96,165,250,.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96,165,250,.1) 1px, transparent 1px);
 }
 @keyframes gateGradient {
   0%, 100% { background-position: 0% 50%; }
@@ -279,3 +289,9 @@ a:hover > .cat-hover-img { animation: floaty 1.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
   .slide.is-active img, .car-dots button.dot-progress::after, #brand-marquee img { animation: none !important; }
 }
+
+/* 3D model modal */
+.model3d-modal .model3d-overlay { opacity: 0; transition: opacity .25s ease; }
+.model3d-modal .model3d-card { opacity: 0; transform: scale(.94) translateY(10px); transition: opacity .25s cubic-bezier(.22,.61,.36,1), transform .25s cubic-bezier(.22,.61,.36,1); }
+.model3d-modal.model3d-open .model3d-overlay { opacity: 1; }
+.model3d-modal.model3d-open .model3d-card { opacity: 1; transform: scale(1) translateY(0); }

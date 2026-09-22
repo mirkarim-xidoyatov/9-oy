@@ -9,9 +9,9 @@ const HERO_SLIDES = [
 ];
 
 function heroSlideHTML(s, i) {
-  return `<a href="${s.href}" class="slide shrink-0 basis-full relative block aspect-[1616/551] bg-gray-100" role="group" aria-roledescription="slide" aria-label="${i + 1} / ${HERO_SLIDES.length}">
+  return `<a href="${s.href}" class="slide shrink-0 basis-full relative block aspect-[1616/551] bg-gray-100 dark:bg-gray-800" role="group" aria-roledescription="slide" aria-label="${i + 1} / ${HERO_SLIDES.length}">
     <img src="${s.img}" alt="${s.alt}" class="absolute inset-0 w-full h-full object-cover" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async" draggable="false" />
-    <span class="hidden sm:inline-flex absolute left-6 lg:left-10 bottom-5 lg:bottom-8 bg-white text-gray-900 hover:bg-brand hover:text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-lg transition-colors">${s.cta}</span>
+    <span class="hidden sm:inline-flex absolute left-6 lg:left-10 bottom-5 lg:bottom-8 bg-white dark:bg-gray-900 text-gray-900 dark:text-white hover:bg-brand hover:text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-lg transition-colors">${s.cta}</span>
   </a>`;
 }
 
@@ -49,6 +49,7 @@ function initCarousel() {
       d.classList.toggle('sm:bg-white/40', active);
       d.classList.toggle('w-6', active);
       d.classList.toggle('bg-gray-300', !active);
+      d.classList.toggle('dark:bg-gray-600', !active);
       d.classList.toggle('sm:bg-white/50', !active);
       d.classList.toggle('w-[7px]', !active);
       d.classList.remove('dot-progress');

@@ -13,46 +13,46 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="theme.js"></script>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
 
 <div id="app-header"></div>
 
 <main>
   <section class="max-w-[600px] mx-auto px-4 sm:px-5 py-6 sm:py-10">
     <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-1">Profil</h1>
-    <p class="text-sm text-gray-500 mb-6">Buyurtma berishda ma'lumotlaringiz avtomatik to'ldiriladi.</p>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Buyurtma berishda ma'lumotlaringiz avtomatik to'ldiriladi.</p>
 
-    <div id="profile-view" hidden class="border border-gray-200 rounded-2xl p-5 sm:p-6 shadow-card">
+    <div id="profile-view" hidden data-reveal class="border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-6 shadow-card">
       <div class="flex items-center gap-4 mb-5">
         <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-brand to-indigo-500 text-white flex items-center justify-center font-extrabold text-xl sm:text-2xl flex-shrink-0" id="profile-initial">A</div>
         <div class="min-w-0">
           <div id="profile-name" class="font-bold text-lg truncate"></div>
-          <div id="profile-phone" class="text-sm text-gray-500 tabular"></div>
-          <div id="profile-email" class="text-sm text-gray-500 truncate"></div>
+          <div id="profile-phone" class="text-sm text-gray-500 dark:text-gray-400 tabular"></div>
+          <div id="profile-email" class="text-sm text-gray-500 dark:text-gray-400 truncate"></div>
         </div>
       </div>
       <div class="grid grid-cols-2 gap-2.5 mb-5">
-        <a href="buyurtmalar.html" class="rounded-xl bg-gray-50 border border-gray-200 hover:border-brand hover:text-brand px-4 py-3 text-sm font-semibold transition-colors">Buyurtmalarim</a>
-        <a href="garaj.html" class="rounded-xl bg-gray-50 border border-gray-200 hover:border-brand hover:text-brand px-4 py-3 text-sm font-semibold transition-colors">Mening garajim</a>
+        <a href="buyurtmalar.html" class="rounded-xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-800 hover:border-brand hover:text-brand px-4 py-3 text-sm font-semibold transition-colors">Buyurtmalarim</a>
+        <a href="garaj.html" class="rounded-xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-800 hover:border-brand hover:text-brand px-4 py-3 text-sm font-semibold transition-colors">Mening garajim</a>
       </div>
-      <div class="flex items-center gap-4 border-t border-gray-100 pt-4">
+      <div class="flex items-center gap-4 border-t border-gray-100 dark:border-gray-800 pt-4">
         <button id="edit-profile" class="text-sm font-semibold text-brand hover:underline">Tahrirlash</button>
-        <button id="logout-profile" class="text-sm font-semibold text-gray-500 hover:text-red-500 transition-colors">Chiqish</button>
+        <button id="logout-profile" class="text-sm font-semibold text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors">Chiqish</button>
       </div>
     </div>
 
-    <form id="profile-form" class="border border-gray-200 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-card">
+    <form id="profile-form" data-reveal class="border border-gray-200 dark:border-gray-800 rounded-2xl p-5 sm:p-6 flex flex-col gap-4 shadow-card">
       <div>
         <label for="p-name" class="text-sm font-semibold mb-1.5 block">Ism familiya</label>
-        <input id="p-name" required autocomplete="name" placeholder="Masalan: Aziz Muminov" class="w-full h-11 bg-gray-50 border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10 transition" />
+        <input id="p-name" required autocomplete="name" placeholder="Masalan: Aziz Muminov" class="w-full h-11 bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-800 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white dark:focus:bg-gray-800 focus:ring-4 focus:ring-brand/10 transition" />
       </div>
       <div>
         <label for="p-phone" class="text-sm font-semibold mb-1.5 block">Telefon raqam</label>
-        <input id="p-phone" required type="tel" inputmode="tel" autocomplete="tel" placeholder="+998 90 123 45 67" class="w-full h-11 bg-gray-50 border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10 transition tabular" />
+        <input id="p-phone" required type="tel" inputmode="tel" autocomplete="tel" placeholder="+998 90 123 45 67" class="w-full h-11 bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-800 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white dark:focus:bg-gray-800 focus:ring-4 focus:ring-brand/10 transition tabular" />
       </div>
       <div>
-        <label for="p-email" class="text-sm font-semibold mb-1.5 block">Email <span class="text-gray-400 font-normal">(ixtiyoriy)</span></label>
-        <input id="p-email" type="email" inputmode="email" autocomplete="email" placeholder="email@misol.uz" class="w-full h-11 bg-gray-50 border border-gray-200 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/10 transition" />
+        <label for="p-email" class="text-sm font-semibold mb-1.5 block">Email <span class="text-gray-400 dark:text-gray-500 font-normal">(ixtiyoriy)</span></label>
+        <input id="p-email" type="email" inputmode="email" autocomplete="email" placeholder="email@misol.uz" class="w-full h-11 bg-gray-50 dark:bg-gray-800/60 border border-gray-200 dark:border-gray-800 rounded-xl px-3.5 text-sm outline-none focus:border-brand focus:bg-white dark:focus:bg-gray-800 focus:ring-4 focus:ring-brand/10 transition" />
       </div>
       <button type="submit" class="press-fx h-12 bg-brand hover:bg-brand-dark text-white font-bold rounded-xl transition-colors mt-1 shadow-lift">Saqlash</button>
     </form>
