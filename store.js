@@ -59,7 +59,7 @@ const PRODUCTS = [
   { id: 'tire-michelin-275-35-r19', name: 'Avtoshina MICHELIN 275/35 R19, CrossClimate 3 Sport', img: 'https://exzap.uz/photo_upload/21445s_1.webp', price: 5688000, oldPrice: 6053000, discount: 6, category: 'tires' },
   { id: 'tire-michelin-265-50-r20', name: 'Avtoshina MICHELIN 265/50 R20, CrossClimate 3', img: 'https://exzap.uz/photo_upload/21455s_1.webp', price: 5688000, oldPrice: 6183000, discount: 8, category: 'tires' },
   { id: 'tire-michelin-225-40-r19', name: 'Avtoshina MICHELIN 225/40 R19, CrossClimate 3 Sport', img: 'https://exzap.uz/photo_upload/21464s_1.webp', price: 3746000, oldPrice: 4028000, discount: 7, category: 'tires' },
-  { id: 'tire-hankook-185-65-r14', name: 'Barcha mavsum shina HANKOOK 185/65 R14, Kinergy 4S2', img: 'https://exzap.uz/photo_upload/21869s_1.webp', price: 736000, oldPrice: 836000, discount: 12, category: 'tires' },
+  { id: 'tire-hankook-185-65-r14', name: 'Barcha mavsum shina HANKOOK 185/65 R14, Kinergy 4S2', img: 'images/tire-hankook-185-65-r14.webp', price: 736000, oldPrice: 836000, discount: 12, category: 'tires' },
 
   // Suyuqliklar
   { id: 'fluid-rolf-g11-green-1l', name: 'Antifriz ROLF G11 Green -40, 1L', img: 'https://exzap.uz/photo_upload/7370m_1.webp', price: 31000, oldPrice: 36000, discount: 14, category: 'fluids' },
@@ -196,6 +196,17 @@ function searchProducts(query, list) {
     .filter((x) => x.s > 0)
     .sort((a, b) => b.s - a.s || b.p.discount - a.p.discount)
     .map((x) => x.p);
+}
+
+// Har qanday avtomobilga mos "universal" toifalar (moy, akkumulyator, antifriz, kimyo, asboblar)
+const UNIVERSAL_CATEGORIES = ['motor-oil', 'fluids', 'chemicals', 'batteries', 'tools'];
+
+// Avtomobil modeliga mos qismlar: nomida modeli aytilgan qismlar + har qanday mashinaga mos universal qismlar
+function getPartsForVehicle(model) {
+  const modelMatches = searchProducts(model, PRODUCTS);
+  const modelIds = new Set(modelMatches.map((p) => p.id));
+  const universalMatches = PRODUCTS.filter((p) => UNIVERSAL_CATEGORIES.includes(p.category) && !modelIds.has(p.id));
+  return modelMatches.concat(universalMatches);
 }
 
 function readJSON(key, fallback) {

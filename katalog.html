@@ -60,6 +60,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const activeCat = qs('cat') || '';
     const q = (qs('q') || '').trim().toLowerCase();
+    const car = (qs('car') || '').trim();
     const filter = qs('filter') || '';
 
     const chipClass = (active) => active
@@ -80,13 +81,20 @@
       `<a href="katalog.html?filter=discount" class="${sideClass(isDiscount)}">⚡ Chegirmalar</a>` +
       CATEGORIES.map((c) => `<a href="katalog.html?cat=${c.id}" class="${sideClass(activeCat === c.id)}"><img src="${c.img}" alt="" class="w-7 h-7 rounded-md object-cover img-frame" loading="lazy" />${c.name}</a>`).join('');
 
-    let list = PRODUCTS.slice();
-    if (activeCat) list = list.filter((p) => p.category === activeCat);
-    if (q) list = searchProducts(q, list);
-    else if (filter === 'discount') list = list.slice().sort((a, b) => b.discount - a.discount);
+    let list;
+    if (car) {
+      list = getPartsForVehicle(car);
+      if (activeCat) list = list.filter((p) => p.category === activeCat);
+    } else {
+      list = PRODUCTS.slice();
+      if (activeCat) list = list.filter((p) => p.category === activeCat);
+      if (q) list = searchProducts(q, list);
+      else if (filter === 'discount') list = list.slice().sort((a, b) => b.discount - a.discount);
+    }
 
     let title = 'Barcha toifalar';
-    if (q) title = `"${q}" bo'yicha qidiruv`;
+    if (car) title = `${car} uchun mos qismlar`;
+    else if (q) title = `"${q}" bo'yicha qidiruv`;
     else if (activeCat) title = CATEGORIES.find((c) => c.id === activeCat)?.name || 'Kataloglar';
     else if (filter === 'discount') title = 'Chegirmalar';
     document.getElementById('page-title').textContent = title;

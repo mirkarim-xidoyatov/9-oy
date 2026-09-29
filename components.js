@@ -190,6 +190,8 @@ function footerHTML() {
         <div class="flex gap-2.5">
           <a href="https://t.me/Mirkarim1" target="_blank" rel="noopener" aria-label="Telegram"
              class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand hover:text-white hover:border-brand transition-colors">${ICONS.telegram}</a>
+          <a href="https://t.me/Firdavs_tag" target="_blank" rel="noopener" aria-label="Telegram"
+             class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand hover:text-white hover:border-brand transition-colors">${ICONS.telegram}</a>
           <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-brand hover:text-white hover:border-brand transition-colors">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
           </a>
@@ -228,6 +230,10 @@ function footerHTML() {
           <li class="flex gap-2.5 items-start">
             <span class="text-brand flex-shrink-0 mt-0.5">${ICONS.telegram}</span>
             <a href="https://t.me/Mirkarim1" target="_blank" rel="noopener" class="hover:text-brand">Telegram: @Mirkarim1</a>
+          </li>
+          <li class="flex gap-2.5 items-start">
+            <span class="text-brand flex-shrink-0 mt-0.5">${ICONS.telegram}</span>
+            <a href="https://t.me/Firdavs_tag" target="_blank" rel="noopener" class="hover:text-brand">Telegram: @Firdavs_tag</a>
           </li>
           <li class="flex gap-2.5 items-start">
             <span class="text-brand flex-shrink-0 mt-0.5">${ICONS.pin}</span>
